@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6-Proxy</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    let obj = new Proxy({}, {
+    	get:(target, key, receiver) => {
+    		console.info(`getting ${key}!`)
+            return Reflect.get(target, key, receiver)
+        },
+        set:(target, key, value, receiver) => {
+    		console.info(`setting ${key}!`)
+            return Reflect.set(target, key, receiver)
+        }
+    })
+
+    //receiver可以获取target的this指向
+    obj.count = '1'
+
+    //链式写法，获取get，设置set（赋值行为）
+    const proxy = new Proxy({}, {
+    	get:(target, property) => {
+    		return 'MxHansom'
+        }
+    })
+
+    console.info(proxy.name)
+
+    /*function Shape() {
+	    this.x = 0;
+	    this.y = 0;
+    }
+
+   // superclass method
+    Shape.prototype.move = function(x, y) {
+	    this.x += x;
+	    this.y += y;
+	    console.info('Shape moved.');
+    };
+
+    // Rectangle - subclass
+    function Rectangle() {
+	    Shape.call(this); // call super constructor.
+    }
+
+    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype.constructor = Rectangle;
+
+    console.info(Rectangle)*/
+
+    const handler = {
+    	get: (target, name) => {
+    		if (name === 'prototype') return Object.prototype
+            return 'Hello' + name
+        },
+        apply: (target, thisBinding, args) => {
+    		return args[0]
+        },
+        constructor: (target, args) => {
+    		return args[1]
+        }
+    }
+
+    const fproxy = new Proxy(function (x, y) {
+        return x + y
+    },handler)
+
+    console.info(fproxy(1, 2))
+
+    console.info(new fproxy(1, 2))
+
+    let obj_2 = Object.create({
+    	'a':'hasSom'
+    })
+
+    console.info(obj_2.a)
+
+    function createArray(...elements) {
+        let handler = {
+        	get:(target, propKey, receiver) => {
+        		let index = Number(propKey)
+                if(index < 0) {
+        			propKey = String(target.length + index)
+                }
+                return Reflect(target, propKey, receiver)
+            }
+        }
+
+	    let target = []
+
+	    target.push(...elements)
+
+	    return new Proxy(target, handler)
+    }
+
+    let arr = createArray('a','b','c')
+
+
+</script>

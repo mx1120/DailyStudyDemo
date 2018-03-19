@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    img
+</body>
+</html>
+<script src="js/bufferMove.js"></script>
+<script src="js/animation.js"></script>
+<script src="js/Tween.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/cookieToLocalStorage.js"></script>
+<script>
+    //构造函数分享
+
+    const preloadImage = (path) => {
+        return new Promise(function (resolve, reject) {
+            var img = new Image()
+            img.onload = resolve
+            img.onerror = reject
+            img.src = path
+        })
+    }
+
+
+    preloadImage('./src/img/twinkling.png')
+    let img = null
+    img = preloadImage('./src/img/twinkling.png')
+
+    class Play {
+        constructor(x = 0,y = 2){
+            this.x = x
+            this.y = y
+        }
+
+        playGame () {
+            console.log('play game')
+        }
+    }
+
+    let mx = new Play()
+
+    class PlaySub extends Play {
+        constructor(){
+            super()
+        }
+    }
+
+
+    let pl = new PlaySub()
+    pl.playGame()
+
+    let a = [1,2,3,4,5]
+
+    let b = a
+
+    c= a[0]
+
+    b[0] = 10
+    //a c
+
+
+    console.dir(Array)
+
+
+    Promise.prototype.finally = function (cb) {
+        let Pro = this.constructor
+        return this.then(
+            value => Pro.resolve(cb()).then(()=>value),
+            error => Pro.resolve(cb()).then(()=>error)
+        )
+    }
+    Promise.prototype.last = function (cb) {
+        let Pro = this.constructor
+        return this.finally(
+            success => Pro.resolve(cb())
+        )
+    }
+
+
+    let p  = Promise.resolve('pl')
+
+    p
+        .then((a) => {
+            console.log(a)
+        })
+        .catch(() => {
+            console.warn('wrong')
+        })
+        .finally(() => {
+            console.log('completed')
+        })
+
+    let l = new Promise((resolve, reject) => reject('wrong'))
+    l
+        .then()
+        .catch(error => {
+            console.log(error)
+        })
+
+
+</script>

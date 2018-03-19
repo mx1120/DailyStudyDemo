@@ -1,0 +1,300 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>英文句子评测</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="17kouyu API JS SDK" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link href="assets/css/ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="assets/static/Config.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+
+            var refText = "Where are you from";
+
+            $("#content .currentWord").html(refText);
+
+            window.iPanel = new _17kouyu.IPanel({
+                appKey: Config.appKey,
+                secretKey: Config.secretKey,
+                data: {
+                    audioUrl: "assets/static/mp3/en/Where are you from.mp3",  //标准音频URL
+                    duration: 5000, //传入参数手动设置录音时长
+                    serverParams: {                 // 录音服务参数
+                        coreType: "sent.eval",	// 选择内核sent.eval
+                        refText: refText,           // 参考文本
+                        attachAudioUrl:1,           // 获取音频下载地址
+                        userId: "guest"             // 用户id
+                    }
+                },
+                onBeforeRecord: function(){         // 录音之前需要清除评分，可以在这里设置录音参数
+                    $("#scoreResult .pron").empty();
+                    $("#scoreResult .fluency").empty();
+                    $("#scoreResult .integrity").empty();
+                    $("#scoreResult .words").empty();
+                    $("#scoreResult .rearTone").empty();
+                    var customWord = $('#customWord').val();
+                    if ($('#customWord').val() != '' && $('#customWord').val() != null && customWord != refText) {
+                        refText = customWord;
+                        iPanel.setData({
+                            //audioUrl: "static/mp3/en/" + refText + ".mp3",
+                            audioUrl: "assets/static/mp3/en/pass.mp3",
+                            serverParams: {
+                                coreType: "sent.eval",
+                                refText: refText,
+                                attachAudioUrl: 1,           // 获取音频下载地址
+                                userId: "guest"
+                            }
+                        });
+                    }
+                },
+                onScore: function(data){            // 评分成功需要显示评分结果
+                    console.info(data);
+                    var resultObj = new _17kouyu.SentEval(data);
+                    $("#scoreResult .pron").html(resultObj.getOverall());
+                    $("#scoreResult .integrity").html(resultObj.getIntegrity());
+                    $("#scoreResult .fluency").html(resultObj.getFluency());
+                    $("#scoreResult .rearTone").html(resultObj.getRearTone() == 'rise' ? '升调' : resultObj.getRearTone() == 'fall' ? '降调' : '');
+                    var htmlString = '';
+                    for (var i = 0; i < resultObj.getWordSize(); i++) {
+                        var c = resultObj.getWord(i).getChar().replace(/^[^a-zA-z]/,'').replace(/[^a-zA-z]$/,'');
+                        htmlString += '<li>';
+                        htmlString += '<i class="fa fa-caret-right blue"></i> ';
+                        htmlString += c + " : " + resultObj.getWord(i).getScore();
+                        htmlString += '</li>';
+                    }
+                    $("#scoreResult .words").html(htmlString);
+                },
+                onScoreError: function(errorType){//评分失败的显示 "TIMEOUT", "NO_DATA", ErrorID
+                    var errorObj = _17kouyu.IStatusCode.get(errorType, "cn");
+                    alert(errorObj.feedback);
+                }
+            });
+            iPanel.Dialog.close();
+            var flag = 1;
+            window.changeWord = function(){
+                $('.customWordButton').html('自定义句子');
+                $('#customWord').val('');
+                $('.customWord').css("display","none");
+                $('.currentWord').removeAttr("style");
+                $('.play').removeAttr("style");
+
+                var refTextArr = ['Where are you from', 'The capital of my country is Beijing', 'He wants a sheep for his birthday'];
+                //flag = Math.floor(Math.random()*refTextArr.length);
+                if(flag >= refTextArr.length)
+                    flag = 0;
+                refText = refTextArr[flag ++];
+                //refText = "The capital of my country is Beijing";
+                $("#content .currentWord").html(refText);
+                $("#scoreResult .pron").empty();
+                $("#scoreResult .integrity").empty();
+                $("#scoreResult .words").empty();
+                iPanel.setData({
+                    audioUrl: "assets/static/mp3/en/" + refText + ".mp3",
+                    serverParams: {
+                        coreType: "sent.eval",
+                        refText: refText,
+                        userId: "guest"
+                    }
+                });
+            }
+
+            window.customWord = function(){
+                $this = $('.customWordButton');
+                if($this.html() == '自定义句子'){
+                    $this.html('取消自定义');
+                    $('.currentWord').css("display","none");
+                    $('.customWord').removeAttr("style");
+                    $('.play').css("display","none");
+                }
+                else if($this.html() == '取消自定义'){
+                    $this.html('自定义句子');
+                    $('#customWord').val('');
+                    $('.customWord').css("display","none");
+                    $('.currentWord').removeAttr("style");
+                    $('.play').removeAttr("style");
+                }
+            }
+
+            if (window.location.search == "?debug") {
+                $(".debug").show();
+            }
+            $("#reloadButton").click(function(){
+                iPanel.params.appKey = $("#appKey").val();
+                iPanel.params.secretKey = $("#secretKey").val();
+                iPanel.Media.createRecorder();
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="main-container" id="main-container">
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home home-icon"></i>
+                        <a href="javasccript:void(0)"></a>
+                    </li>
+                    <li class="active">英文句子评分应用</li>
+                </ul>
+            </div>
+            <div class="page-content" id="content">
+                <div class="row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-8">
+                        <!-- 通常把Flash播放器放在content节点的最上面 -->
+                        <div id="player"></div>
+                        <div class="page-header">
+                            <h1 class="currentWord"></h1>
+                            <h1 class="customWord" style="display:none;"><input id="customWord" class="form-control" type="text" placeholder="自定义句子"></input></h1>
+                        </div>
+                        <div class="row hidden">
+                            <div class="col-xs-12">
+                                <form class="form-inline">
+                                    <button class="btn btn-white btn-info btn-bold" style="display:none;">
+                                        <i class="fa fa-undo bigger-120 blue"></i>
+                                        reload
+                                    </button>
+                                    <div class="form-group" style="display:none;">
+                                        <label class="col-sm-3 control-label no-padding-right" for="appKey">appKey:</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="appKey" placeholder="appKey" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display:none;">
+                                        <label class="col-sm-3 control-label no-padding-right" for="secretKey">secretKey:</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="secretKey" placeholder="secretKey" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="iPanel" class="iPanel">
+                                    <button class="btn btn-app btn-primary btn-xs play"><i class="fa bigger-160"></i></button>
+                                    <button class="btn btn-app btn-primary btn-xs record"><i class="fa bigger-160"></i></button>
+                                    <button class="btn btn-app btn-primary btn-xs replay"><i class="fa bigger-160"></i></button>
+                                    <button class="btn btn-app btn-primary btn-xs changeWordButton" onclick="changeWord();">换个句子</button>
+                                    <button class="btn btn-app btn-primary btn-xs customWordButton" onclick="customWord();" style="width:114px">自定义句子</button>
+                                    <button class="btn btn-app btn-primary btn-xs hidden rateButton">Rate</button>
+                                    <div class="space"></div>
+                                    <div style="height:15px">
+                                        <div class="recordProgressBar" style="width:200px;">
+                                            <div class="value">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr hr-double hr-dotted hr32"></div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="widget-box">
+                                    <div class="widget-header widget-header-flat">
+                                        <h4 class="widget-title">得分</h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <ul id="scoreResult" class="list-unstyled spaced">
+                                                        <li>总分: <span class="pron"></span></li>
+                                                        <li>流利度: <span class="fluency"></span></li>
+                                                        <li>完整度: <span class="integrity"></span></li>
+                                                        <li>句末语调: <span class="rearTone"></span></li>
+                                                        <li>详细得分:</li>
+                                                        <li>
+                                                            <ul class="list-unstyled words"></ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+            </div>
+            <div id="iMediaDialogOverlay" class="iMediaDialogOverlay"> </div>
+
+            <div id="iMediaDialog" class="iMediaDialog">
+                <div class="dialogTitle">
+                    设置面板
+                    <button class="dialogCloseButton">
+                        X
+                    </button>
+                </div>
+                <div class="dialogFlashError">
+                    <p class="flashVersion" style="display:none">
+                        您电脑的Flash版本过低，请点击此链接升级。
+                        <br/>
+                        <a href="http://get.adobe.com/flashplayer/" target="_blank">点击下载最新Flash版本</a>
+                    </p>
+                    <p class="flashPlugin" style="display:none">
+                        您的电脑没有安装或者禁用Flash插件，请确认。
+                        <br/>
+                        <a href="http://get.adobe.com/flashplayer/" target="_blank">点击下载最新Flash版本</a>
+                    </p>
+                </div>
+                <div class="dialogBody"><div id="recorder"></div></div>
+                <div class="dialogInfo">
+                    <h5>状态信息</h5>
+                    <ul class="list-unstyled">
+                        <li class="loadFlashPlayer" style="display:none">
+                            <span class="info">正在下载Flash播放器...</span>
+                        </li>
+                        <li class="loadFlashRecorder" style="display:none">
+                            <span class="info">正在下载Flash录音机...</span>
+                        </li>
+                        <li class="connectServerInit" style="display:none">
+                            <span class="error">还没有连接录音服务器</span>
+                        </li>
+                        <li class="connectServerStart" style="display:none">
+                            <span class="info">正在连接录音服务器，请稍候...</span>
+                        </li>
+                        <li class="connectServerSuccess" style="display:none">
+                            <span class="success">连接录音服务器成功</span>
+                        </li>
+                        <li class="connectServerError" style="display:none">
+                            <span class="error">连接录音服务器失败，请<a href="javascript:iPanel.recorder.reconnect();">重试</a></span>
+                        </li>
+                        <li class="micStatusAllow" style="display:none">
+                            <span class="success">Flash可以访问麦克风</span>
+                        </li>
+                        <li class="micStatusDisallow" style="display:none">
+                            <span class="error">Flash不能访问麦克风，请设置</span>
+                        </li>
+                        <li class="micStatusError" style="display:none">
+                            <span class="error">没有找到录音设备，请检查</span>
+                        </li>
+                        <li class="mmscfgError" style="display:none">
+                            <span class="error">Flash被禁止访问麦克风，请手动删除 mms.cfg文件，然后重试</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dialogButton">
+                    <button class="okButton">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

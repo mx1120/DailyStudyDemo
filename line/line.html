@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连线题</title>
+</head>
+<body>
+    <div class="line-component">
+
+        <canvas id="canvasLine" width="500" height="1000"></canvas>
+
+        <div class="left">
+
+            <div class="originLeft">
+                <div class="choice">
+                    <div class="changeType">
+                        @
+                    </div>
+                    <div class="delete">
+                        x
+                    </div>
+                </div>
+
+                <div class="l-item">
+                    <div class="cont" contenteditable="true">
+
+                    </div>
+                    <div class="img">
+                        <div class="img_box">
+
+                        </div>
+                        <div id="up_l">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="addLeft">
+                +
+            </div>
+
+        </div>
+
+        <div class="right">
+            <div class="originRight">
+                <div class="choice">
+                    <div class="changeType">
+                        @
+                    </div>
+                    <div class="delete">
+                        x
+                    </div>
+                </div>
+
+                <div class="r-item">
+                    <div class="cont" contenteditable="true">
+
+                    </div>
+                    <div class="img">
+                        <div class="img_box">
+
+                        </div>
+                        <div id="up_r">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="addRight">
+                +
+            </div>
+        </div>
+
+        <div class="editor">
+            <div class="write">
+                编辑
+            </div>
+            <div class="couldMakeLine">
+                连线
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+<script src="../js/jquery.js"></script>
+<script>
+
+</script>
+<style>
+    #canvasLine {
+        position: absolute;
+        left: 0;
+        top:0;
+        z-index: -1;
+    }
+    .line-component {
+        width: 500px;
+        border: 1px solid red;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        justify-content: space-between;
+    }
+    .editor {
+        width: 500px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .write, .couldMakeLine {
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        user-select: none;
+        background: #903;
+    }
+    .originLeft {
+        overflow: hidden;
+        margin-bottom:10px;
+    }
+    .left {
+        width: 150px;
+        min-height: 100px;
+        /*display: flex;*/
+    }
+    .left:after {
+        content: "";
+        height: 0;
+        line-height: 0;
+        display: block;
+        visibility: hidden;
+        clear: both;
+        z-index: 2;
+    }
+    .left .l-item {
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin-bottom:10px;
+    }
+    .left .l-item .cont {
+        width: 100%;
+        height: 100%;
+        background: pink;
+    }
+    .left .l-item .img {
+        width: 100%;
+        height: 100%;
+        display: none;
+        background: purple;
+    }
+    .left .choice {
+        width: 50px;
+        background: white;
+        float: left;
+        margin-bottom:10px;
+    }
+    .left .choice .changeType {
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+    .left .addLeft {
+        width: 100px;
+        height: 100px;
+        margin-left:50px;
+        text-align: center;
+        background: white;
+        color: black;
+        cursor: pointer;
+        line-height: 100px;
+        float: left;
+    }
+    .left .choice .delete {
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+
+    .right .r-item {
+        height: 100px;
+    }
+    .right {
+        z-index: 2;
+        width: 150px;
+        min-height: 100px;
+    }
+    .originRight {
+        overflow: hidden;
+        margin-bottom:10px;
+    }
+    .right {
+        width: 150px;
+        min-height: 100px;
+        /*display: flex;*/
+    }
+    .right:after {
+        content: "";
+        height: 0;
+        line-height: 0;
+        display: block;
+        visibility: hidden;
+        clear: both;
+        z-index: 2;
+    }
+    .right .r-item {
+        width: 100px;
+        height: 100px;
+        background: #903;
+        float: right;
+        margin-bottom:10px;
+    }
+    .right .r-item .cont {
+        width: 100%;
+        height: 100%;
+        background: pink;
+    }
+    .right .r-item .img {
+        width: 100%;
+        height: 100%;
+        display: none;
+        background: purple;
+    }
+    .right .choice {
+        width: 50px;
+        background: white;
+        float: right;
+        margin-bottom:10px;
+    }
+    .right .choice .changeType {
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+    .right .addRight {
+        width: 100px;
+        height: 100px;
+        margin-right:50px;
+        text-align: center;
+        background: white;
+        color: black;
+        cursor: pointer;
+        line-height: 100px;
+        float: left;
+    }
+    .right .choice .delete {
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+</style>
+<script>
+    var $addLeft = $('.addLeft'), $addRight = $('.addRight')
+    var canvasOC = {}
+    var lineLeft = {}, lineRight = {}
+    var couldEditor = false
+    var Line = new Map(), l = false, r = false
+    var canvasObject = $('#canvasLine').get(0)
+    var ctx = canvasObject.getContext('2d')
+    $addLeft.on('click', function () {
+        var div = $('<div class="choice"> <div class="changeType"> @ </div> <div class="delete"> x </div> </div> <div class="l-item"><div class="cont" contenteditable="true"></div> <div class="img"></div></div>')
+        $('.originLeft').append(div)
+    })
+    $addRight.on('click', function () {
+	    var div = $('<div class="choice"> <div class="changeType"> @ </div> <div class="delete"> x </div> </div> <div class="r-item"><div class="cont" contenteditable="true"></div> <div class="img"> </div></div>')
+	    $('.originRight').append(div)
+    })
+
+    $('.originLeft').on('click', '.l-item', function (ev) {
+       if(couldEditor) {
+            var index = $('.l-item').index($(this))
+            var target = $('.l-item').get(index)
+            var lx = target.offsetLeft + target.clientWidth
+            var ly = target.offsetTop + target.clientHeight / 2
+            canvasOC.lx = lx
+            canvasOC.ly = ly
+            canvasOC.from = index
+            lineLeft = {content:ev.target.innerText, image: '', link_id: -1}
+            lineLeft.index = index
+            canvasOC.left = lineLeft
+            l = true
+            makeLine()
+        }
+    })
+
+    $('.originRight').on('click', '.r-item', function (ev) {
+        if(couldEditor) {
+	        var index = $('.r-item').index($(this))
+	        var target = $('.r-item').get(index)
+	        var rx = target.offsetLeft
+	        var ry = target.offsetTop + target.clientHeight / 2
+	        canvasOC.rx = rx
+	        canvasOC.ry = ry
+            canvasOC.to = index
+	        lineRight = {content:ev.target.innerText, image: '', link_id: canvasOC.from}
+	        lineRight.index = index
+	        canvasOC.right = lineRight
+            r = true
+	        makeLine()
+        }
+    })
+
+    $('.originLeft').on('click', '.changeType', function () {
+	    var index = $('.originLeft .changeType').index($(this))
+	    $('.originLeft .l-item .cont').eq(index).toggle()
+	    $('.originLeft .l-item .img').eq(index).toggle()
+    })
+
+    $('.originRight').on('click', '.changeType', function () {
+	    var index = $('.originRight .changeType').index($(this))
+	    $('.originRight .r-item .cont').eq(index).toggle()
+	    $('.originRight .r-item .img').eq(index).toggle()
+    })
+
+    $('.write').on('click', function () {
+        couldEditor = false
+    })
+    $('.couldMakeLine').on('click', function () {
+        couldEditor = true
+    })
+
+    function makeLine() {
+        if(!l || !r) return
+        //画布重置
+	    canvasObject.width = canvasObject.width
+	    ctx.lineWidth = 2
+	    ctx.strokeStyle = 'black'
+        let oc = Object.assign({}, canvasOC)
+        Line.set(canvasOC.from, oc)
+        for(val of Line.values()) {
+            ctx.moveTo(val.lx, val.ly)
+            ctx.lineTo(val.rx, val.ry)
+        }
+	    ctx.stroke()
+        l = false
+        r = false
+        Object.keys(canvasOC).forEach(val => {
+        	delete  canvasOC[val]
+        })
+    }
+
+
+
+</script>

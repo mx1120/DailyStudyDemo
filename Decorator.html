@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let a = 'mx'
+    let b = 'pl'
+    console.log(`${a} ${b}`)
+    function testable(isTestable) {
+        return function (target) {
+            target.isTestable = isTestable
+        }
+    }
+    @testable(true)
+    class MyTestableClass {}
+
+    console.log(MyTestableClass.isTestable)
+
+
+    function* gen() {
+        yield console.log('1')
+        console.info('begin')
+        yield console.log('2')
+        console.info('end')
+    }
+
+    let mx = gen()
+
+    mx.next()
+
+</script>

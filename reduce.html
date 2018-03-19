@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array_reduce</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let arr = [9,1,2,2,3,4,54,22,6,7]
+
+    let arr_sub = [...new Set(arr)]
+
+//    console.info(arr_sub)
+
+    arr_sub.reduce(function (val,fn) {
+        console.info(val)
+    },null)
+
+
+
+    let mx = 'a,b,c,d'
+    console.info(mx.split(','))
+</script>

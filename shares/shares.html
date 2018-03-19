@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	/*
+	* pre为半年前的指数,应当为dic，包含每一股的名字，以及当时指标
+	* now为当下的指数
+	* computed为计算出的每一股的差值
+	* result为正向波动大于percent（给定指标）的数值
+	* percent为所需的正向波动指标
+	* pre与now应为一一对应关系
+	* */
+    let pre = [], now = [], computed = [], result = null
+
+    let percent = 6
+
+    for (let i = 0; i < 100; i ++) {
+    	let obj = new Object()
+	    obj['name'] = i
+	    obj['per'] = parseFloat(Math.random() * 100).toFixed(2)
+    	if( i > 49) {
+		    pre.push(obj)
+        }else {
+		    now.push(obj)
+        }
+    }
+
+    /*如果数据本省带有百分号，需要去除%后按照number类型进行计算 */
+    q = [{"name":"A", "per": "11%"}, {"name":"B", "per": "15%"}, {"name":"C", "per": "19%"}]
+    q.forEach((val, key) => {
+    	val.per = val['per'].split('%')[0]
+    	q.splice(key, 1, val)
+    })
+
+    pre.forEach((val, key) => {
+    	let obj = new Object()
+        obj['name'] = val.name
+	    obj['wave'] = ((now[key].per - val.per) / val.per).toFixed(2)
+	    computed.push(obj)
+    })
+    result = computed.filter(val => val.wave > percent)
+    console.info(result)
+
+
+</script>

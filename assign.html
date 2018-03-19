@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let obj = {
+        'a':1,
+        'b':2
+    }
+
+    obj.c = 3
+
+    Object.defineProperty(obj, 'd', {
+        value:'Dream'
+    })
+
+    for (let item in obj){
+        console.log(item)
+    }
+    obj.d = 'mengxiang'
+
+    console.info(obj)
+
+//    for(let [key, value] of obj.entries()){
+//    	console.info(`${key}:${value}`)
+//    }
+</script>

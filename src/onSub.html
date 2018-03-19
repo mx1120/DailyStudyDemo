@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li class="mx" data-num="1">1</li>
+        <li class="mx" data-num="2">2</li>
+        <li class="mx" data-num="3">3</li>
+        <li class="mx" data-num="4">4</li>
+        <li class="mx" data-num="5">5</li>
+        <li class="mx" data-num="6">6</li>
+        <li class="mx" data-num="7">7</li>
+        <li class="mx" data-num="8">8</li>
+        <li class="mx" data-num="9">9</li>
+    </ul>
+    <ul>
+        <li class="mx">1</li>
+        <li class="mx">2</li>
+        <li class="mx">3</li>
+        <li class="mx">4</li>
+        <li class="mx">5</li>
+        <li class="mx">6</li>
+        <li class="mx">7</li>
+        <li class="mx">8</li>
+        <li class="mx">9</li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="../js/jquery.js"></script>
+<script>
+    $(function () {
+        var li = $('.mx')
+        li.on('click',function () {
+            console.info($(this).index())
+        })
+    })
+
+    function mx() {
+        return 1 != 0
+    }
+
+    console.info(mx())
+
+</script>

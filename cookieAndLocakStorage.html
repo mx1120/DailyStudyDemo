@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="js/cookieToLocalStorage.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/jquery.js"></script>
+<script>
+    SetCookie('a','aa')
+    var mx = CookieToLocalStorage(document.cookie)
+    console.log(mx)
+
+
+    SetCookie('b','bb')
+
+    var mx = CookieToLocalStorage(document.cookie)
+    console.log(mx)
+
+    $(function () {
+        console.log($(window).height())
+        console.log(document.body.offsetHeight)
+    })
+</script>

@@ -1,0 +1,23 @@
+{
+  "name": "runoob",
+  "version": "1.0.0",
+  "description": "Node.js测试",
+  "main": "express.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mx1120/node.js.git"
+  },
+  "author": "mengxiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mx1120/node.js/issues"
+  },
+  "homepage": "https://github.com/mx1120/node.js#readme"
+}

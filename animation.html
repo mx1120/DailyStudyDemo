@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #back-to-top{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background: #903;
+    }
+</style>
+<body>
+    <div id="mx" style="width: 100px;height: 100px;background: #903;position: absolute;left: 0;top: 0;"></div>
+<div id="back-to-top">
+
+</div>
+</body>
+</html>
+<script src=""></script>
+<script src="js/bufferMove.js"></script>
+<script src="js/animation.js"></script>
+<script src="js/Tween.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/cookieToLocalStorage.js"></script>
+<script>
+    let Div = document.getElementById('mx')
+
+  /*  var opacity = function () {
+        Math.animation(600,0,'Linear',(val) =>{
+            Div.style.opacity = val / 600
+        })
+    }*/
+    //value为当前的初始位置
+    Math.animation(0, 600, 'Quad.easeIn', 600, (value,isEnding) =>{
+        Div.style.transform = 'translateX(' + value + 'px)';
+        Div.style.top = value + 'px'
+        /*opacity()*/
+        if(isEnding){
+            Math.animation(600,0,'Linear',500,(val,time)=>{
+                Div.style.transform = 'translateX(' + val + 'px)';
+                Div.style.top = val + 'px'
+            })
+        }
+    });
+
+
+    SetCookie('key','value')
+    console.log(document.cookie)
+    let a =CookieToLocalStorage(document.cookie)
+    console.log(a)
+
+</script>

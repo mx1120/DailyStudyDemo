@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div class='move'>
+    </div>
+</div>
+</body>
+</html>
+<style>
+    @keyframes animate {
+        0%{
+            background:url(./src/img/1.png) no-repeat;
+        }
+        25%{
+            background:url(./src/img/2.png) no-repeat;
+        }
+        50%{
+            background:url(./src/img/3.png) no-repeat;
+        }
+        75%{
+            background:url(./src/img/4.png) no-repeat;
+        }
+        100%{
+            background:url(./src/img/1.png) no-repeat;
+        }
+    }
+    .move{
+        width: 265px;
+        height: 420px;
+        background:url(./src/img/1.png) no-repeat;
+        opacity: 1;
+        margin: 0 auto;
+        /*animation:animate 3s ease-in-out;*/
+        -webkit-animation:animate 1.5s cubic-bezier(0.7,0.5,0,1);
+    }
+</style>

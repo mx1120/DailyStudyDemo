@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let a = Symbol()
+    console.log(typeof a)
+
+    //Promise对象resolve或reject的对象将在then的成功或者失败回调中作为第一个参数
+    let promise = Promise.resolve('mmmm')
+    promise
+        .then((res) => {
+            console.log(res)
+            console.info('i am just test')
+        })
+        .catch(error => {
+            console.warn(error)
+        })
+
+    let c = {}
+    let mx = Symbol()
+    c.mx = 'english'
+    c[mx] = 'justTest'
+    console.info(c.mx)
+    console.info(c)
+
+</script>

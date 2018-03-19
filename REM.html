@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="mx">1111111111</div>
+</body>
+</html>
+<style>
+    html{
+        font-size: 40px;
+    }
+    .mx{
+        font-size: 2rem;
+    }
+</style>
+<script>(function (doc, win) {
+	var htmlFont = function () {
+		var docEl = doc.documentElement, l = docEl.clientWidth, f;
+		f = l / 18;
+		l > 720 ? docEl.style.fontSize = 40 + "px" : docEl.style.fontSize = f + "px";
+	};
+	htmlFont();
+	win.addEventListener("resize", htmlFont, false);
+})(document, window);</script>

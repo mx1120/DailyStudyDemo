@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "node server",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "mengxiang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

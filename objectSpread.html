@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>objectSpread</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    //对象中的默认值
+    function foo({x,y = 5}) {
+        console.log(x,y)
+    }
+
+    foo({})
+
+    foo({x:1})
+
+    function fetch(url,{method = 'GET'} = {}) {
+        console.log(method)
+    }
+
+    fetch('http://example')
+
+
+    //当函数设定了默认值之后，函数的length属性将发生变化，将返回没有指定默认值的参数个数
+    console.log((function (a) {
+
+    }).length)
+
+    console.log((function (a = 5) {
+
+    }).length)
+
+    //mx的length属性值为2，因为c的属性为2
+    function mx(a,b,c=5) {
+
+    }
+    console.log(mx.length)
+
+
+    var x =1
+
+    function f(x,y=x) {
+        console.log(y)
+    }
+
+    f(2)
+
+    let x2 = 1
+
+    function f2(y=x2) {
+        let x2 = 2
+        console.log(y)
+    }
+
+    f2()  //f2()此时的数值为1，不是2，因为在 y=x2 之前，已经对x2进行了一次赋值，此时的x2数值为1
+
+
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzddddddddddddddddddddddddddddd')
+
+    function add(...values) {
+        let sum = 0
+
+        for(var val of values){
+            sum += val
+        }
+
+        return sum
+    }
+
+
+    add(2,5,3)
+
+    console.log(add(2,5,3))   //10
+
+    function push(array,...items) {
+        items.forEach( v =>{
+            array.push(v)
+        })
+    }
+    let arr = []
+
+    push(arr,1,2,3,4,5)
+
+    console.log(arr)
+
+    //扩展运算符
+
+    function push2(array,...items) {
+        array.push(items)
+        console.log(items.sort())
+    }
+
+    let a3 = []
+
+    push2(a3,2,4,5,7,1,8)
+
+    let a4 = [4,43]
+
+    console.log(...a4)
+
+    let arr1 = [0,1,2]
+
+    let arr2 = [3,4,5]
+
+    //数组pushES5
+    Array.prototype.push.apply(arr1,arr2)
+
+    //数组pushES6
+   /* arr1.push(...arr2)*/
+
+    console.log(arr1)
+
+    //数组合并
+
+    let array_test = [...[1,2,3],...[4,5,6],...[7,8,9]]
+    console.log(array_test)
+
+
+
+    console.info('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
+
+    class Point {
+    	constructor (x, y) {
+    		Object.assign(this, {x, y})
+            this.m = 'handsome'
+        }
+        say() {
+    		console.info('say')
+        }
+    }
+
+    let m12 = new Point(1, 3)
+
+    const  ObjectMerge = function (target, ...args) {
+        return Object.assign(target, ...args)
+    }
+
+
+    let pl1 = {
+    	'name': 'mengxiang',
+        'face': 'handsome',
+        'tell': 'hight'
+    }
+
+    let t1 = Reflect.ownKeys(pl1)
+    let t2 = Object.keys(pl1)
+    let t3 = Object.getOwnPropertyNames(pl1)
+    console.info(t1)
+    console.info(t2)
+    console.info(t3)
+
+
+    Object.keys(pl1).forEach(v => {
+    	console.info(pl1[v])
+    })
+
+    console.info('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
+
+    Object.entries(pl1).forEach(([val, key]) => {
+    	console.info(`${key}:${val}`)
+    })
+
+</script>

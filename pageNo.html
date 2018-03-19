@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="M-box1"></div>
+</body>
+</html>
+<script src="./js/jquery.js"></script>
+<script src="./js/jquery.pagination.js"></script>
+<script>
+    var index = undefined
+	$('.M-box1').pagination({
+		count:2,
+//		totalData:100,
+		pageCount:13,
+		showData:5,
+		coping:true
+	});
+
+	$('.M-box1').on('click', 'a', function () {
+//		console.info($(this)[0].getAttribute('data-page'))
+		index = $(this)[0].getAttribute('data-page')
+        console.info(index)
+	})
+
+</script>
+<style>
+    a{
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: black;
+    }
+    .active{
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: pink;
+    }
+    .prev, .next{
+        display: none;
+    }
+</style>

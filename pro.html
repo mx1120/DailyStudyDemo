@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="./js/jquery.js"></script>
+<script>
+    $.getScript("./js/animation.js", function(data, textStatus, jqxhr) {
+        console.log(data); //data returned
+        console.log(textStatus); //success
+        console.log(jqxhr.status); //200 表示获取成功
+        console.log('Load was performed.');
+    });
+</script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array And String</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //array
+    let array = [1,2,3,6,4,8,7,9]
+    console.log(array.reverse())
+
+
+    let mx = array.filter(function (x) {
+        return x > 3
+    })
+
+    console.log(mx)
+
+    let pl = array.find(x => x > 4)  //只能打印出数组最后一个大于3的value
+
+    console.log(pl)
+
+    let mx_array = ['a',,'b'].filter(x=>true)
+    console.log(mx_array)
+
+
+
+
+    //string
+
+    console.log('hello'.startsWith('ello',1))
+
+
+    console.log('ZZZZZZZZZZZZZZZZZZZZZ')
+
+    //字符串取值
+
+    function mathTrunc (x) {
+        return (x < 0 ? Math.ceil(x) : Math.floor(x));
+    }
+
+    console.log(mathTrunc(42.5))
+
+    //判断正负   -1代表为负数   1代表为正数
+
+    console.log(Math.sign(-15))
+    console.log(Math.sign(15))
+
+/*
+    首先，没有{} ， 即执行完 默认返回，（return 操作）。
+
+    如果有{} 默认执行完是不返回的。
+
+    如果要返回一个对象，我们需要在=> 后面加上（{}）。*/
+
+
+    tem1 = (a=1,b=2)=> a+b
+    console.log(tem1(5, 7))
+
+    tem2 = (a=1,b=2)=> { let c = null
+        c = a+b
+    }
+    console.log(tem2())
+
+    tem3 = (a=1,b=2)=> ({a:b})
+    console.log(tem3('mx', 'want to merry'))
+
+
+
+
+
+</script>

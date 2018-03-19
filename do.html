@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	function m1({x = 0, y = 0} = {}) {
+		return [x, y]
+	}
+	function m2({x, y} = {x: 1, y: 1}) {
+		return [x, y]
+	}
+    console.log(1)
+	console.info(m1())
+	console.info(m2())
+</script>

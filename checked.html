@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<table class="tb_list">
+
+    <tr class="tr_info">
+        <td class="ppr">
+            <input type="radio" name="status" value="2" class="user_set">省管理员
+            <input type="radio" name="status" value="3" class="user_set">市管理员
+            <input type="radio" name="status" value="4" class="user_set">区管理员
+            <button type="button" onclick="sure_user(this.value)">确定</button>
+        </td>
+    </tr>
+
+    <tr class="tr_info">
+        <td>
+            <input type="radio" name="status" value="2" class="user_set">省管理员
+            <input type="radio" name="status" value="3" class="user_set">市管理员
+            <input type="radio" name="status" value="4" class="user_set">区管理员
+            <button type="button" onclick="sure_user(this.value)">确定</button>
+        </td>
+    </tr>
+
+    <tr class="tr_info">
+        <td>
+            <input type="radio" name="status" value="2" class="user_set">省管理员
+            <input type="radio" name="status" value="3" class="user_set">市管理员
+            <input type="radio" name="status" value="4" class="user_set">区管理员
+            <button type="button" onclick="sure_user(this)">确定</button>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>
+<script src="./js/jquery.js"></script>
+<script>
+        function sure_user(val) {
+            var type = $(val).parent('.ppr').children('.user_set:checked').val();
+            console.log(type)
+        }
+
+        $("input[type='radio']").prop("checked", function( i, val ) {
+            console.info(Array.from($('input')))
+        });
+</script>

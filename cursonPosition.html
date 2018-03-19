@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<input type="text" value="" id="test" oninput="getPotision(this)" onkeyup="setPotision(this);" >-->
+<input type="text" value="" id="test" onkeyup="setPotision(this);" >
+<div onclick="create(456)" style="width: 100px;height: 100px;background: #903">
+
+</div>
+
+<div id="mx">
+    <span>just test</span>
+</div>
+<p>输入过程中console.log(当前光标位置),鼠标弹起console.log(光标向前移动一位)</p>
+</body>
+</html>
+<script>
+    function getCursortPosition(element) {
+	    var CaretPos = 0;
+	    if (document.selection) {//支持IE
+		    element.focus();
+		    var Sel = document.selection.createRange();
+		    Sel.moveStart('character', -element.value.length);
+		    CaretPos = Sel.text.length;
+	    }
+	    else if (element.selectionStart || element.selectionStart == '0')//支持firefox
+	    	console.info(element.selectionStart)
+		    CaretPos = element.selectionStart;
+	    return (CaretPos);
+    }
+
+    function setCaretPosition(element, pos){
+	    if(element.setSelectionRange)
+	    {
+		    element.focus();
+		    element.setSelectionRange(pos,pos);
+	    }
+	    else if (element.createTextRange) {
+		    var range = element.createTextRange();
+		    range.collapse(true);
+		    range.moveEnd('character', pos);
+		    range.moveStart('character', pos);
+		    range.select();
+	    }
+    }
+    function setPotision(element){
+	    var nowIndex = getCursortPosition(element);
+	    console.info(nowIndex)
+	    setCaretPosition(element,nowIndex-1);
+	    console.log(getCursortPosition(element));
+    }
+
+    let testDiv = document.querySelector('#mx')
+    function create(data) {
+    	console.info(1)
+        console.info(document.querySelector('#mx').innerHTML.length)
+        let span = document.createElement('span')
+        span.contentEditable = 'true'
+        span.style.display = 'block'
+        span.style.width = 100 + 'px'
+        span.style.height = 50 + 'px'
+        span.style.marginTop = 10 + 'px'
+        span.style.background = 'rgba(0,0,150,.3)'
+        span.innerHTML = data
+        document.querySelector('#mx').appendChild(span)
+    }
+
+    console.info(document.querySelector('#mx').firstElementChild.innerHTML.length - 1)
+    console.info(document.querySelector('#mx').firstChild)
+</script>

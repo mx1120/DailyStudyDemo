@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+    <p class="mx"></p>
+<body>
+
+</body>
+</html>
+<script src="js/jquery.js"></script>
+<script>
+    class Animal{
+        constructor(a,b){//这个constructor方法内定义的方法和属性是实例化对象自己的，不共享；construstor外定义的方法和属性是所有实例对象（共享）可以调用的
+            this.type = 'animal'  //this关键字代表Animal对象的实例对象
+            this.en = a
+        }
+        says(say){
+            console.log(this.type+' says ' + say);
+            setTimeout(function () {
+                //这里的this指向全局，即为window
+                console.log(this)
+            },500)
+            setTimeout(()=>{
+                //这里的this因为是箭头函数的缘故，所以指向的时上一级即 Animal这个实例化的对象
+                console.log(this)
+            },500)
+        }
+        say (int){
+            console.log(this.type)
+            console.log(int)
+        }
+    }
+
+
+    let animal = new Animal(7,5);
+    console.log(animal.en)
+    animal.say(135)
+    animal.says('hello');//控制台输出‘animal says hello’
+
+
+    //这里声明一个Cat类，来继承Animal类的属性和方法
+    class Cat extends Animal{
+        constructor() {
+            super ()
+            this.type = cat
+        }
+    }
+    let cat  = new Cat();
+     //输出‘cat says hello’
+
+
+   // 解构  详解
+
+    let cat1 = 'ken2';
+    let dog1 ='lili2';
+    let zoo1 = {cat1,dog1};
+    console.log(zoo1);
+
+
+    let dog3 = {type:'animal',many: 2};
+    let {type,many} = dog3; //将对象或者数组中提取值，然后对变量进行赋值--即解构
+    console.log(type,many);//animal 2
+
+
+    function animal1(type = 'mx'){
+        console.log(type);
+    }
+    animal1();//输出'cat'
+
+
+    //定义被监听的目标对象
+    let engineer = { name: 'Joe Sixpack', salary: 50, age:15};
+    //定义处理程序
+    let interceptor = {
+        set(receiver, property, value) {
+            console.log(property, 'is changed to', value);
+            //三个参数含义
+            receiver[property] = value;
+        }
+    };
+    //创建代理以进行侦听
+    engineer = new Proxy(engineer, interceptor);
+    //做一些改动来触发代理
+    engineer.salary = 70;//控制台输出：salary is changed to 70
+
+
+    console.log(1111)
+
+
+    class Point {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        toString() {
+            return '(' + this.x + ', ' + this.y + ')';
+        }
+    }
+
+    let cons = new Point('mx','pl')
+
+    console.log(cons.x)
+    console.log(cons.y)
+    console.log(cons.toString())
+
+    class cons2 extends Point{
+        constructor(x, y) {
+            super();
+            this.x = x;
+            this.y = y;
+        }
+
+        toString() {
+            return '(' + this.x + ', ' + this.y + ')';
+        }
+    }
+
+    console.log(cons2)
+
+
+    function mx(str) {
+        if(true) console.log(str)
+
+    }
+    mx('i am ok')
+
+    let array_test = ['red','black','yellow']
+    var qq = 13579
+
+    class Test {
+        constructor() {
+            this.type = 135
+            this.img = new Image()
+        }
+
+        [array_test] () {
+
+        }
+
+        say () {
+            console.log('say')
+        }
+
+    }
+
+
+    let mx_1 = new Test()
+    mx_1.say()
+    mx_1.img.src = './novoice.png'
+    console.log(mx_1.img)
+    console.log(mx_1)
+
+
+
+    var currentTime = new Date().getTime()
+
+    console.log(currentTime)
+
+    function atm(str) {
+        if(str == 1) console.log('m')
+        else if(str == 2) console.log('x')
+        else console.log('321')
+    }
+
+
+</script>
+
+<script>
+    function* gen(str) {
+        try {
+            var y = yield str + 2
+        }
+        catch (e){
+            console.log(e)
+        }
+        return y
+    }
+
+    var g = gen(1)
+    g.next()
+    g.next(2)
+    console.log(g.next())
+    console.log(g.next(2))
+    console.log(g.throw('出错了，测试成功'))
+
+
+
+    function* gen2() {
+        var url = 'http://api.github.com/users/github'
+        var result = yield fetch(url)
+        console.log(result.bio)
+    }
+
+
+
+    var g1 = gen2()
+    var result = g1.next()
+    result.value.then(data=>{
+
+    }).then(data =>{
+        g1.next(data)
+    })
+
+
+</script>
+

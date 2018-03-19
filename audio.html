@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    const audio = {}
+    audio.newAudio = new Audio()
+    let play = audio.newAudio
+    play.src = 'http://file.m.xueceping.cn/upload_media/tts/mp3/2015/07/21/b3ea269f226cb2c316e8107a21aa7170.mp3'
+    play.autoplay = true
+   console.info(play)
+    let obj = {}
+   var mx = function (name, src, autoplay = false, canplaythrough = false) {
+	    obj[name] = new Audio()
+	    obj[name].src = src
+	    obj[name].autoplay = autoplay || false
+	    obj[name].canplaythrough = canplaythrough || false
+	    return obj
+    }
+    console.info(mx('11', '2222'))
+
+</script>

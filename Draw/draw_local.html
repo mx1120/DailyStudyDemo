@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>年会抽奖活动</title>
+    <style>
+        * {
+            margin: 0;
+            padding:0;
+        }
+        .wrapper {
+            height: 100vh;
+            width: 100%;
+            background: url("./source/banner.png") center center no-repeat;
+            background-size:cover;
+            overflow: hidden;
+            position: relative;
+        }
+        .inner {
+            width: 1300px;
+            height: 330px;
+            position: absolute;
+            left: 50%;
+            margin-left: -650px;
+            top: 120px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .btn {
+            font-size: 50px;
+            cursor: pointer;
+            user-select:none;
+            width: 180px;
+            height: 80px;
+            background: linear-gradient(#ec8f3e, #f39e4e, #f5af4f, #f5b857, #f8c164);
+            line-height: 80px;
+            text-align: center;
+            border-radius: 10px;
+            position: absolute;
+            color: white;
+            text-shadow: 0 2px #e3800c, 2px 0 #e3800c, -2px 0 #e3800c, 0 -2px #e3800c;
+            left: 50%;
+            bottom: 60px;
+            margin-left: -90px;
+        }
+        .lucky{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+        }
+        .reset{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .animated {
+            width: 200px;
+            height: 400px;
+            margin-top: 25px;
+            font-size: 36px;
+            border-radius: 10px;
+            line-height: 100px;
+            text-align: center;
+            position: relative;
+        }
+        .animated span {
+            position: absolute;
+            left: 0;
+            top:0;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border:2px solid #f5b857;
+            overflow: hidden;
+        }
+        span:nth-of-type(1){
+            background: url("./source/b.png");
+            background-size: cover;
+            font-family: Microsoft YaHei;
+            color: yellow;
+        }
+        span:nth-of-type(1) p:nth-of-type(1) {
+            font-size: 34px;
+            margin-top: 100px;
+            line-height: 70px;
+        }
+        span:nth-of-type(1) p:nth-of-type(2) {
+            font-size: 24px;
+            line-height: 44px;
+        }
+        span:nth-of-type(2){
+            /*background: url("./source/face.png");*/
+            background: url("./source/a.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .in {
+            -webkit-animation-timing-function: ease-out;
+            -webkit-animation-duration: 350ms;
+            animation-timing-function: ease-out;
+            animation-duration: 350ms;
+        }
+        .out {
+            -webkit-animation-timing-function: ease-in;
+            -webkit-animation-duration: 225ms;
+            animation-timing-function: ease-in;
+            animation-duration: 225ms;
+        }
+        .display {
+            display: block;
+        }
+        .block {
+            display: block;
+        }
+        .viewport-flip {
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+        }
+        .flip {
+            -webkit-backface-visibility: hidden;
+            -webkit-transform: translateX(0);
+            backface-visibility: hidden;
+            transform: translateX(0);
+        }
+        .flip.out {
+            -webkit-transform: rotateY(-90deg) scale(.9);
+            -webkit-animation-name: flipouttoleft;
+            -webkit-animation-duration: 225ms;
+            transform: rotateY(-90deg) scale(.9);
+            animation-name: flipouttoleft;
+            animation-duration: 225ms;
+        }
+        .flip.in {
+            -webkit-animation-name: flipintoright;
+            -webkit-animation-duration: 225ms;
+            animation-name: flipintoright;
+            animation-duration: 225ms;
+        }
+        .flip.dis {
+            border: none;
+        }
+        @-webkit-keyframes flipouttoleft {
+            from { -webkit-transform: rotateY(0deg); }
+            to { -webkit-transform: rotateY(-90deg) scale(.9); }
+        }
+        @keyframes flipouttoleft {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(-90deg) scale(.9); }
+        }
+        @-webkit-keyframes flipintoright {
+            from { -webkit-transform: rotateY(90deg) scale(.9); }
+            to { -webkit-transform: rotateY(0deg); }
+        }
+        @keyframes flipintoright {
+            from { transform: rotateY(90deg) scale(.9); }
+            to { transform: rotateY(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="inner">
+            <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+            <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+            <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+            <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+            <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        </div>
+        <div class="btn" contenteditable="false">
+            <div class="lucky">
+                抽 奖
+            </div>
+            <div class="reset">
+                重 置
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./source/jquery.js"></script>
+<script>
+
+	var participate  = [["同步课堂技术部", "杜祖永"], ["同步课堂技术部", "任万兴"], ["同步课堂技术部", "谢曼曼"], ["同步课堂技术部", "张丹"], ["同步课堂技术部", "孟祥"],
+		["同步课堂技术部", "李梦龙"], ["同步课堂技术部", "葛帅东"], ["同步课堂技术部", "李帅"], ["同步课堂技术部", "黄洋洋"], ["同步课堂技术部", "肖杉杉"],
+		["同步课堂技术部", "王果果"], ["同步课堂技术部", "段海燕"], ["同步课堂技术部", "李永振"], ["同步课堂技术部", "赵艳洁"], ["同步课堂技术部", "张艳梅"],
+		["同步课堂技术部", "陈彩娟"], ["同步课堂技术部", "樊亚东"], ["同步课堂技术部", "韦春申"], ["同步课堂技术部", "梁佳霖"], ["同步课堂技术部", "宋亚伟"],
+		["同步课堂技术部", "杨俊磊"], ["同步课堂技术部", "高海飞"], ["同步课堂技术部", "宋国洋"], ["同步课堂技术部", "王世成"], ["同步课堂技术部", "吕杨"],
+		["同步课堂技术部", "张帅男"], ["同步课堂技术部", "王洒"], ["同步课堂技术部", "张茹茹"], ["同步课堂技术部", "王建彬"], ["同步课堂技术部", "张嘉麒"],
+		["优鸿技术部", "徐威"], ["优鸿技术部", "范小康"], ["优鸿技术部", "凡慧杰"], ["优鸿技术部", "邵珍珍"], ["优鸿技术部", "王志刚"],
+		["优鸿技术部", "张治业"], ["优鸿技术部", "何唯敏"], ["优鸿技术部", "张二彬"], ["优鸿技术部", "艾明明"], ["优鸿技术部", "宋亚鹏"],
+		["优鸿技术部", "周腾腾"], ["优鸿技术部", "陈星星"], ["优鸿技术部", "郭朋举"], ["优鸿技术部", "张龙龙"], ["优鸿技术部", "张震"],
+		["优鸿技术部", "王逢超"], ["优鸿技术部", "宋宏闯"], ["优鸿技术部", "张豪飞"], ["优鸿技术部", "张凯"], ["优鸿技术部", "李亚冬"],
+		["优鸿技术部", "陈俊"], ["优鸿技术部", "鲁东铭"], ["优鸿技术部", "郭东波"], ["优鸿技术部", "谷国权"], ["优鸿产品部", "房萌"],
+		["优鸿产品部", "王宝雪"], ["优鸿产品部", "谷俊芳"], ["优鸿产品部", "臧雪"], ["优鸿产品部", "田家明"], ["优鸿产品部", "乔瑜"],
+		["优鸿产品部", "栾永霞"], ["优鸿产品部", "蔡东洋"], ["同步课堂产品部", "吕贺勇"], ["同步课堂产品部", "张彦涛"], ["同步课堂产品部", "刘艳辉"],
+		["同步课堂产品部", "周田芝"], ["同步课堂产品部", "刘启明"], ["同步课堂产品部", "高霁野"], ["同步课堂产品部", "高强"], ["同步课堂产品部", "陈雅倩"],
+		["同步课堂产品部", "马援"], ["运营部", "王朝立"], ["运营部", "党陶陶"], ["运营部", "解君"], ["运营部", "高娟"], ["运营部", "郭应强"],
+		["优鸿加盟部", "韦灵刚"], ["优鸿加盟部", "李永山"], ["优鸿旗舰店", "孙超"], ["优鸿旗舰店", "董花"], ["优鸿旗舰店", "杜思莹"],
+		["优鸿旗舰店", "杨延霖"], ["优鸿旗舰店", "赵倩"], ["客服部", "来晓晨"], ["客服部", "王洁莹"], ["客服部", "潘素红"], ["客服部", "梁晓雪"],
+		["客服部", "赵丽娟"], ["客服部", "张灿"], ["客服部", "何利利"], ["人事部", "王婵"], ["人事部", "陈凯"], ["人事部", "韩雪"],
+		["人事部", "王宇洋"], ["中招部", "常文兵"], ["中招部", "陈亚阁"], ["中招部", "张楠"], ["中招部", "钱钰琦"], ["中招部", "孙亚楠"],
+		["中招部", "贾岚祥"], ["中招部", "武豪杰"], ["资源部", "田金胜"], ["资源部", "郑君丽"], ["资源部", "刘乐乐"], ["资源部", "郭翠红"],
+		["资源部", "张迎"], ["资源部", "任冰"], ["资源部", "陈海清"], ["资源部", "郝萌蕾"], ["资源部", "邹丹丹"],
+		["资源部", "王力"], ["资源部", "张敏"], ["资源部", "杨婷婷"], ["资源部", "王晶晶"], ["资源部", "汪彦昌"], ["资源部", "朱江涛"],
+		["资源部", "张利阳"], ["资源部", "李瑞"], ["资源部", "李亚元"], ["资源部", "柳清清"], ["资源部", "王晓平"], ["资源部", "董闪"],
+		["资源部", "王军园"], ["资源部", "朱秀梅"], ["资源部", "王珊"], ["资源部", "张海洋"], ["资源部", "刘晓晖"], ["资源部", "段艳艳"],
+		["资源部", "付双"], ["资源部", "张明"], ["资源部", "乔嘉玲"], ["资源部", "康奇"], ["资源部", "王卫静"], ["资源部", "谢赢莎"],
+		["资源部", "李素芳"], ["资源部", "茹丽祥"], ["资源部", "任佩佩"], ["资源部", "彭娜娜"], ["资源部", "韩莹莉"], ["资源部", "董玉静"],
+		["资源部", "刘敏"], ["资源部", "程芳芳"], ["资源部", "王虹"], ["资源部", "吕飞"], ["资源部", "张艳华"],
+		["资源部", "韩苹"], ["市场部", "张永奇"], ["市场部", "史  芳"], ["市场部", "郭京敏"], ["市场部", "王青艳"], ["市场部", "闫  冉"],
+		["市场部", "史亚飞"], ["市场部", "申彬"], ["市场部", "张晓斌"], ["市场部", "陈明"], ["市场部", "王喜泉"],
+		["市场部", "徐祥"], ["市场部", "靳春恩"], ["市场部", "赵振亮"], ["市场部", "贺江"], ["市场部", "王震"], ["市场部", "王雪丽"],
+		["市场部", "张振宇"], ["市场部", "魏玉晶"], ["市场部", "李  阳"], ["市场部", "张晓寅"], ["市场部", "朱阁晖"], ["市场部", "高松"],
+		["市场部", "田姗姗"], ["市场部", "刘印"], ["市场部", "白碧波"], ["市场部", "李项怡"], ["市场部", "水松岩"], ["市场部", "成强"],
+		["市场部", "陈蕾"], ["市场部", "甄营利"], ["市场部", "郭利霞"], ["市场部", "王小静"], ["市场部", "杨鹏亮"], ["市场部", "张亚楠"],
+		["市场部", "王志华"], ["市场部", "洪海啸"], ["市场部", "韩文浩"], ["市场部", "苏晓筱"], ["市场部", "祁航"], ["市场部", "王炫锟"],
+		["市场部", "邬娟"], ["市场部", "赵永康"], ["市场部", "李苗苗"], ["市场部", "叶培加"], ["市场部", "王珂"], ["市场部", "蒋慧"],
+		["市场部", "张琼月"], ["市场部", "宗争光"], ["市场部", "董元元"], ["市场部", "肖南"], ["市场部", "周如霞"], ["市场部", "王佳"],
+		["市场部", "马笠"], ["市场部", "王腾祥"], ["市场部", "李静"], ["市场部", " 杨田"], ["市场部", "张莉"], ["市场部", "吴森"],
+		["市场部", "周英"], ["市场部", "殷福祥"], ["市场部", "崔莉君"], ["市场部", "程志恒"], ["市场部", "李栋"], ["市场部", "郑亚军"],
+		["市场部", "刘燕"]]
+    var Timer = null, flag = true, lucky, singleIndex = 0, singleIndexFlag = true
+    var luckyFlag = true, singleClickReset = true
+    var times = 1
+
+    //开奖
+	$('.lucky').on('click', function () {
+		if(luckyFlag) {
+			flag = true
+			singleIndexFlag = false
+			luckyFlag = false
+			lucky = luckyMan()
+			var index = 1
+			$('.s1').each((key, val) => {
+				val.innerHTML = `<p>${lucky[key][1]}</p><p>${lucky[key][0]}</p>`
+			})
+			$('.s2').eq(0).addClass("out").removeClass("in");
+			setTimeout(function() {
+				$('.s1').eq(0).addClass("in").removeClass("out dis");
+				$('.s2').eq(0).addClass('dis')
+			}, 225)
+			Timers(index)
+        }
+	})
+    //重置获奖人
+    $('.reset').on('click', function() {
+       if(!flag) {
+           singleIndex = 0
+           singleIndexFlag = true
+	       luckyFlag = true
+           $('.lucky').fadeIn(200)
+           $('.reset').fadeOut(200)
+           $('.s1').addClass("out").removeClass("in");
+           setTimeout(function() {
+               $('.s2').addClass("in").removeClass("out dis");
+               $('.s1').addClass('dis')
+           }, 225)
+       }
+    })
+    //单张获奖卡片
+    $('.animated .s2').on('click', function () {
+        if(singleIndexFlag){
+            if(singleClickReset) {
+                lucky = luckyMan()
+                singleClickReset = false
+            }
+            $('.btn').animate({opacity:'0', bottom:'50px'}, 500, function () {
+                $('.lucky').css('display','none')
+                $('.reset').css('display','block')
+            })
+            if(singleIndex > 4) {
+                return
+            }
+            singleIndex++
+            if(singleIndex == 5) {
+                flag = false
+                setTimeout(() => {
+                    $('.btn').animate({opacity:'1', bottom:'60px'}, 500)
+                }, 500)
+	            singleClickReset = true
+            }
+            var index = $('.s2').index($(this))
+            $('.s2').eq(index).addClass("out").removeClass("in")
+            setTimeout(function() {
+                $('.s1').eq(index).addClass("in").removeClass("out dis").html(`<p>${lucky[index][1]}</p><p>${lucky[index][0]}</p>`)
+                $('.s2').eq(index).addClass('dis')
+            }, 225)
+        }
+    })
+    //抽取获奖人数
+    function luckyMan() {
+	    var person = []
+        if (participate.length < 5) return false
+        do {
+            person.push(participate[parseInt(Math.random()*participate.length)])
+        } while (newArray(person).length < 5 && participate.length > 5)
+        //返回获奖人数
+	    //把已选则的人数清除掉
+	    remainMan(newArray(person))
+	    times++
+        return person
+    }
+    //获取剩下人数
+    function remainMan(person) {
+        var remain = []
+        participate.forEach(val => {
+            let c = person.findIndex(now => val == now)
+            if (c > -1) delete person[c]
+            else remain.push(val);
+        })
+        console.info(remain.length)
+        participate = remain
+    }
+    //数组去重
+    function newArray(arr) {
+        return [...new Set(arr)]
+    }
+    //自动抽奖
+    function Timers(index) {
+        Timer = setInterval(() => {
+                if(index < 5) {
+                    $('.s2').eq(index).addClass("out").removeClass("in");
+                    setTimeout(function() {
+                        $('.s1').eq(index).addClass("in").removeClass("out dis");
+                        $('.s2').eq(index).addClass('dis')
+                        index++
+                    }, 225)
+                }else {
+                    clearInterval(Timer)
+                    $('.lucky').fadeOut(400)
+                    $('.reset').fadeIn(400)
+                    flag = false
+	                setTimeout(() => {
+		                luckyFlag = true
+                    }, 500)
+                }
+            }, 500)
+    }
+</script>

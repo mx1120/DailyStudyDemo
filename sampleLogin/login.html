@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <div class="info">
+        账号：<input type="text" placeholder="请输入账号"><br/>
+        密码：<input type="password" placeholder="请输入密码">
+    </div>
+    <button type="button" id="btn">submit</button>
+
+　　 <ul>
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+        <li>item4</li>
+        <li>item5</li>
+        <li>item6</li>
+    </ul>
+</body>
+</html>
+<style>
+    input{
+        margin: 20px 0 5px 0;
+    }
+    .info{
+        text-align: center;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+	$("ul").on("mouseover",function(e){
+		$(e.target).css("background-color","#ddd").siblings().css("background-color","white");
+	})
+
+    $('#btn').click(function () {
+	    $.ajax({
+		    type:"post",
+		    url:"http://127.0.0.1:9898/login",
+		    dataType:"json",
+		    jsonp:"callback",
+		    data:{
+			    shopid:192,
+			    eid:77,
+			    qingType:2
+		    },
+		    success:function(data){
+			    console.log(data);
+		    }
+	    })
+    })
+</script>

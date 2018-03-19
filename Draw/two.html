@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>年会抽奖活动</title>
+    <style>
+        * {
+            margin: 0;
+            padding:0;
+        }
+        .wrapper {
+            height: 100vh;
+            width: 100%;
+            background: url("./source/banner.png") center center no-repeat;
+            background-size:cover;
+            overflow: hidden;
+            position: relative;
+        }
+        .inner {
+            width: 650px;
+            height: 660px;
+            position: absolute;
+            left: 50%;
+            margin-left: -325px;
+            top: 120px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .btn {
+            font-size: 50px;
+            cursor: pointer;
+            user-select:none;
+            width: 180px;
+            height: 80px;
+            background: linear-gradient(#ec8f3e, #f39e4e, #f5af4f, #f5b857, #f8c164);
+            line-height: 80px;
+            text-align: center;
+            border-radius: 10px;
+            position: absolute;
+            color: white;
+            text-shadow: 0 2px #e3800c, 2px 0 #e3800c, -2px 0 #e3800c, 0 -2px #e3800c;
+            left: 50%;
+            bottom: 60px;
+            margin-left: -90px;
+        }
+        .lucky{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+        }
+        .reset{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .animated {
+            width: 120px;
+            height: 240px;
+            margin-top: 25px;
+            font-size: 36px;
+            border-radius: 10px;
+            line-height: 100px;
+            text-align: center;
+            position: relative;
+        }
+        .animated span {
+            position: absolute;
+            left: 0;
+            top:0;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border:2px solid #f5b857;
+            overflow: hidden;
+        }
+        span:nth-of-type(1){
+            background: url("./source/b.png");
+            background-size: cover;
+            font-family: Microsoft YaHei;
+            color: yellow;
+        }
+        span:nth-of-type(1) p:nth-of-type(1) {
+            font-size: 17px;
+            margin-top: 50px;
+            line-height: 35px;
+        }
+        span:nth-of-type(1) p:nth-of-type(2) {
+            font-size: 12px;
+            line-height: 22px;
+        }
+        span:nth-of-type(2){
+            /*background: url("./source/face.png");*/
+            background: url("./source/a.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+        .in {
+            -webkit-animation-timing-function: ease-out;
+            -webkit-animation-duration: 350ms;
+            animation-timing-function: ease-out;
+            animation-duration: 350ms;
+        }
+        .out {
+            -webkit-animation-timing-function: ease-in;
+            -webkit-animation-duration: 225ms;
+            animation-timing-function: ease-in;
+            animation-duration: 225ms;
+        }
+        .display {
+            display: block;
+        }
+        .block {
+            display: block;
+        }
+        .viewport-flip {
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+        }
+        .flip {
+            -webkit-backface-visibility: hidden;
+            -webkit-transform: translateX(0);
+            backface-visibility: hidden;
+            transform: translateX(0);
+        }
+        .flip.out {
+            -webkit-transform: rotateY(-90deg) scale(.9);
+            -webkit-animation-name: flipouttoleft;
+            -webkit-animation-duration: 225ms;
+            transform: rotateY(-90deg) scale(.9);
+            animation-name: flipouttoleft;
+            animation-duration: 225ms;
+        }
+        .flip.in {
+            -webkit-animation-name: flipintoright;
+            -webkit-animation-duration: 225ms;
+            animation-name: flipintoright;
+            animation-duration: 225ms;
+        }
+        .flip.dis {
+            border: none;
+        }
+        @-webkit-keyframes flipouttoleft {
+            from { -webkit-transform: rotateY(0deg); }
+            to { -webkit-transform: rotateY(-90deg) scale(.9); }
+        }
+        @keyframes flipouttoleft {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(-90deg) scale(.9); }
+        }
+        @-webkit-keyframes flipintoright {
+            from { -webkit-transform: rotateY(90deg) scale(.9); }
+            to { -webkit-transform: rotateY(0deg); }
+        }
+        @keyframes flipintoright {
+            from { transform: rotateY(90deg) scale(.9); }
+            to { transform: rotateY(0deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="inner">
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+        <div class="animated viewport-flip"><span class="s1 list flip out"></span><span class="s2 list flip in"></span></div>
+    </div>
+    <div class="btn" contenteditable="false">
+        <div class="lucky">
+            抽 奖
+        </div>
+        <div class="reset">
+            停 止
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="./source/jquery.js"></script>
+<script>
+
+	var lucky, people, luckyFlag = true
+	var Timers = null
+
+	//开奖
+	$('.lucky').on('click', function () {
+		if(luckyFlag) {
+			$.get('http://xcptj.beta.jxtbkt.cn/stu/award/', {times: 2}, function (data) {
+				if(data.response == 'ok') {
+					luckyFlag = false
+					lucky = data.data.lucky
+					people = data.data.people
+					Timers = setInterval(() => {
+						$('.s1').each((key, val) => {
+							val.innerHTML = `<p>${people[parseInt(Math.random()*people.length - 1)][1]}</p><p>${people[parseInt(Math.random()*people.length - 1)][0]}</p>`
+						})
+					},25)
+					$('.s2').addClass("out").removeClass("in");
+					setTimeout(function() {
+						$('.s1').addClass("in").removeClass("out dis");
+						$('.s2').addClass('dis')
+					}, 225)
+					$('.lucky').fadeOut(400)
+					$('.reset').fadeIn(400)
+				}else {
+					alert('人数已经抽完啦')
+				}
+			})
+		}
+	})
+	//重置获奖人
+	$('.reset').on('click', function() {
+		clearInterval(Timers)
+		$('.s1').each((key, val) => {
+			val.innerHTML = `<p>${lucky[key][1]}</p><p>${lucky[key][0]}</p>`
+		})
+		luckyFlag = true
+	})
+</script>

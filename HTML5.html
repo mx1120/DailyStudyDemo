@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<audio src="src/music/readygo2.mp3" id="audio"></audio>
+
+<div style="width: 200px;height: 200px;background: #903" id="mx">
+
+</div>
+<div id="test_img">
+    <img src="./source/img/longHair.jpg" alt="">
+</div>
+
+
+<div id="d">
+
+</div>
+<style>
+    #test_img{
+        width: 400px;
+        height: 600px;
+        border: 1px solid black;
+        perspective: 600px;
+        margin-left:200px;
+        padding-left: 100px;
+    }
+    img{
+        width: 280px;
+        height: 400px;
+        transform: translateZ(45px) rotateX(30deg) rotateY(180deg);
+    }
+</style>
+</body>
+</html>
+<script src="js/jquery.js"></script>
+<script>
+    $(function () {
+        $("#audio").on("canplay", function () {
+            /*jQuery(this).data("canplay", true);*/
+            $('#audio').data('canplay',true)
+        });
+
+
+        $('#mx').on('click',function () {
+            console.log('maybe wrong')
+        })
+
+        var html = '<span>111111111</span>你好&lt;span&gt;11111111&lt;/span&gt;'
+
+        $('#d').html(html)
+
+    })
+</script>

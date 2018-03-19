@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="./js/jquery.js"></script>
+<body>
+
+</body>
+</html>
+<script>
+    let defer = $.Deferred()
+
+//    function await(defer) {
+//        const wait = function () {
+//            alert('执行完毕')
+////	        defer.resolve()
+//	        defer.reject()
+//        }
+//        setTimeout(() => {
+//        	wait()
+//        }, 1500)
+//        return defer.promise()
+//    }
+//
+//    $.when(await(defer))
+//        .done(() => {
+//            console.info('success')
+//        })
+//        .fail(() => {
+//    	    console.info('fail')
+//        })
+
+
+//    const wait = function (dtd) {
+//        var dtd = $.Deferred()
+//        var tasks = function () {
+//            alert('执行完毕')
+//	        dtd.resolve()
+//        }
+//        setTimeout(tasks, 1500)
+//        return dtd.promise()
+//    }
+
+
+//    $.when(wait())
+//        .done(() => {
+//    	    alert('success')
+//        })
+//        .fail(() => {
+//    	    alert('fail')
+//        })
+
+
+
+
+//    const wait = function (dtd) {
+//	    var tasks = function () {
+//		    alert('执行完毕')
+//		    dtd.resolve()
+//	    }
+//	    setTimeout(tasks, 1500)
+//	    return dtd.promise()
+//    }
+
+    //$.Deferred()可以接受一个函数名（注意，是函数名）作为参数，$.Deferred()所生成的deferred对象将作为这个函数的默认参数。
+//    $.Deferred(wait)
+//        .done(() => {
+//    	    alert('success')
+//        })
+//        .fail(() => {
+//    	    alert('fail')
+//        })
+
+    var dtd = $.Deferred()
+    var wait = function (dtd) {
+        var tasks = function () {
+            alert('执行完毕')
+            dtd.resolve()
+        }
+        setTimeout(tasks, 1500)
+    }
+
+    dtd.promise(wait)
+    wait
+        .done(() => {
+    	    alert('success')
+        })
+        .fail(() => {
+	        alert('fail')
+        })
+
+    wait(dtd)
+
+    $.when($.ajax( "/main.php" ))
+	    .then(
+            () => {},
+            () => {}
+        )
+        .always(
+            () => {
+            	console.info(1)
+            }
+        )
+
+
+</script>

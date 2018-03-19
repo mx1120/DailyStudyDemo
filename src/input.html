@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id="img" accept="image/jpeg,image/png">
+<button id="btn">打印</button>
+</body>
+</html>
+<script src="../js/jquery.js"></script>
+<script>
+    $(function () {
+        var img = $('#img').val()
+        var btn = $('#btn')
+
+        var phone = '1363388962js'
+        console.info(phone.indexOf('x'))
+        console.info(phone.substring(0,10))
+
+        btn.click(function () {
+            var img = $('#img').val()
+            console.info(img)
+            var pos = img.lastIndexOf("\\");
+            var name = img.substring(pos+1);
+            console.log(name.split('.')[0])
+        })
+
+
+       /* var fileName = file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");*/
+
+
+
+    })
+</script>

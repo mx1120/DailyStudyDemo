@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <iframe src="http://aresource.139jy.cn/educloud2/ucenter/html5/thirdparty/toLogin?hKey=a%2BHUre7Q7fHOA9egz9sW5LmXdwEp4HKONtJOJyxyT9QBryzmWhBUtMNC%2BItvyWIz" frameborder="0" width="700" height="400px" id="iframe">
+
+    </iframe>
+
+    <!--<iframe src="http://www.jxtbkt.cn" frameborder="0" width="700" height="400px" id="iframe">-->
+
+    <!--</iframe>-->
+
+    <form action="http://aauth.139jy.cn/educloud/ucenter/other/h5_login" id="go" method="post">
+        <input type="text" name="client_id" value="2646982">
+        <input type="text" name="callbackurl" value="http://gojs.jxtbkt.com/?from=web">
+    </form>
+
+</body>
+</html>
+<script src="../js/jquery.js"></script>
+<script>
+	var iframeWindow = document.getElementById('iframe').contentWindow;
+	var currentHref = iframeWindow.document.location.href;
+
+    var obj = document.getElementById("iframe").contentWindow;
+    var ifmObj=obj.document.getElementById("go");
+
+    $('#go')
+//    console.info($("#iframe").attr('src', 'http://www.baidu.com'))
+
+//	$("#iframe").contents().find("#go").submit()
+//	$("#iframe").attr('src', 'http://aauth.139jy.cn/educloud/ucenter/other/h5_login')
+
+
+
+
+</script>
+
+<style>
+    #iframe {
+        position: absolute;
+        left: 50%;
+        top: 100px;
+        transform: translate(-50%);
+    }
+</style>

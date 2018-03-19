@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generator</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function* much () {
+        yield 1+2
+        yield 75
+        yield console.log('this is just test')
+        return 'mx'
+    }
+
+    let a = much()
+    console.info(a.next().value)
+
+
+    function* mx() {
+        yield 1
+        yield 2
+        yield 3
+    }
+
+    function* pl() {
+        yield 'm'
+        yield 'x'
+        yield* mx()
+        yield 'okay'
+    }
+
+
+    for(let item of pl()){
+        console.log(item)
+    }
+
+
+    /*console.log('hello' + (yield 123))*/
+</script>

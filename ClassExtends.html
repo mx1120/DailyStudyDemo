@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="mx"></h1>
+</body>
+</html>
+<script>
+    class Play {
+        constructor () {
+            this.name = 'play'
+            this.cp = 'none'
+        }
+        say (a) {
+            console.log(a)
+            alert(123)
+        }
+    }
+
+    class play_sub extends Play {
+        constructor () {
+            super()
+        }
+    }
+
+    let now = new play_sub()
+    console.log(now.name + '111111111111111')
+    now.say('mx')
+
+   /* let playGame = new Play()
+
+
+    playGame.say('mx')*/
+
+
+    class Mx extends Play {
+        constructor (...args) {
+            super(...args)
+            this.type = 'okay'
+        }
+    }
+
+    let mx = new Mx()
+
+    console.log(mx.type)
+    console.info(mx.name)
+    mx.say('okay')
+
+    class MyArray extends Array {
+        constructor(...args){
+            super(...args)
+        }
+        say(){
+            console.log('对于JS自带函数的继承，修改')
+        }
+        DelRepeat (arr){
+            return [...new Set(arr)]
+        }
+    }
+
+    let arr = new MyArray()
+
+
+    arr[0] = '123'
+    arr[1] = '456'
+
+
+    arr.say()
+
+    console.log(arr.DelRepeat([1,1,2,3,4,4,4,4]))
+
+    /*class Versioned extends Array {
+        constructor(){
+            super()
+            this.history = [[]]
+        }
+
+
+        commit () {
+            this.history.push(this.splice())
+        }
+
+        revert () {
+            this.splice (0,this.length,...this.history[this.history.length - 1])
+        }
+    }
+
+
+    let new_arr = new Versioned('1','2','3','5')
+
+    console.log(Versioned)*/
+
+
+
+
+    class Ctx {
+        constructor(a,b,c) {
+            this.age = a
+            this.sex = b
+            c = 'aoteman'
+            this.dream = c
+            this.name = 'ctx'
+            this.type = 'HTML5'
+            this.author = 'mx'
+        }
+        Func (a) {
+            console.log(a + 'is a function')
+        }
+    }
+
+
+    let ctx = new Ctx(24,'man')
+
+
+    ctx.lp = '123'
+
+    ctx.say = () =>{
+        console.log('this is new func')
+    }
+    ctx.say()
+
+    console.log(window)
+
+
+    function dream() {
+        return (class otg{
+            constructor () {
+                this.name = '1'
+                this.type = '2'
+                this.HTML = document.getElementById('mx')
+            }
+        })
+    }
+
+
+    let dragon = new dream()
+
+    console.log(dragon)
+
+
+    let arr_one = [1,2,3]
+
+    arr_one.splice(0,'mx')
+    console.log(arr_one)
+
+
+
+</script>

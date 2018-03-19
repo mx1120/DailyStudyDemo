@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let obj = {
+        data: [ 'hello', 'world' ],
+        [Symbol.iterator]() {
+            const self = this
+            let index = 0
+            return {
+                next() {
+                    if (index < self.data.length) {
+                        return {
+                            value: self.data[index++],
+                            done: false
+                        }
+                    } else {
+                        return { value: undefined, done: true }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //对象没哟interator接口
+    //key，val一一对应
+
+    let mx = {
+	    'go':'yes',
+	    'away':'right'
+    }
+    for(let [key, val] of Object.entries(mx)) {
+	    console.info(`${key}:${val}`)
+    }
+
+    let pl = [0,1,2]
+
+    for(let [key, val] of pl.entries()) {
+	    console.info(`${key}:${val}`)
+    }
+    console.log(obj.next())
+</script>

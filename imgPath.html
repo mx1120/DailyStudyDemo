@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id="img">
+
+<input type="text" id="img2">
+
+<div class="btn" onclick="diss()">
+    获取路径
+</div>
+</body>
+</html>
+<script>
+    let mx = document.getElementById('img')
+
+    function diss() {
+    	console.info(mx.value)
+        console.info(mx.value.split(':')[1])
+    }
+
+</script>

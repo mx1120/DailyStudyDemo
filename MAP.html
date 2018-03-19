@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let mmp = new Map()
+        .set('1','mx')
+        .set('2','pl')
+        .set('3','over')
+
+
+    mmp.set([1,2,3],'Array')
+
+    for(let key of mmp.keys()){
+        console.log(key)
+    }
+
+    document.write(`<br/>`)
+
+    //若设置Map结构中的key为数组或者对象的时候，使用 .values遍历，则结果为其类型（Array或者object）
+
+    for(let val of mmp.values()){
+        console.info(val)
+    }
+
+
+    for(let [key,val] of mmp.entries()){
+        console.log(`${key} ${val}`)
+    }
+
+    //entries相当于interator接口
+
+    let dream = mmp.entries()
+
+    console.info(dream.next().value)
+
+    let arr = [1,2,3,4]
+    let mx = new Map()
+	    .set('editor','mx')
+	    .set(arr,'goaway')
+	    .set('why','lower')
+
+    for(let [key,val] of mx.entries()) {
+	    console.info(`${key}:${val}`)
+	    console.info(key instanceof Array)
+	    if(key instanceof Array){
+		    console.info(key)
+	    }
+    }
+    console.info(Array.from(mx, x => x[1]))
+</script>

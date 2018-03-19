@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>deconstruction</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let mx = () => {
+    	return 1
+    }
+
+    function throwIfMissing() {
+        throw  new Error('Missing parameter, parameter must be exits')
+    }
+
+    function foo(mustBeProvided = throwIfMissing()) {
+        return mustBeProvided
+    }
+//    foo()
+
+    function foo1(optional = undefined) {
+        return (optional == '' ? 0 : 1)
+    }
+
+    foo1()
+    console.info(foo1())
+
+    const full = ({first, second}) => first + ' ' + second
+
+    let obj = {
+    	first: 'm',
+        second: 'x'
+    }
+
+    console.info(full(obj))
+</script>

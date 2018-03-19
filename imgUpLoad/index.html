@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<img src="" alt="" id="img">
+</body>
+</html>
+<script>
+//	function image2Base64(img) {
+//		var canvas = document.createElement("canvas");
+//		canvas.width = img.width;
+//		canvas.height = img.height;
+//		var ctx = canvas.getContext("2d");
+//		ctx.drawImage(img, 0, 0, img.width, img.height);
+//		var dataURL = canvas.toDataURL("image/png");
+//		return dataURL;
+//	}
+//
+//	function getImgBase64(){
+//		var base64="";
+//		var img = new Image();
+//		img.src="./por1.jpg";
+//		img.onload=function(){
+//			base64 = image2Base64(img);
+//			document.getElementById('img').setAttribute('src', base64)
+//			console.log(base64);
+//		}
+//	}
+//
+//	getImgBase64();
+
+
+	var canvas = document.getElementById("canvas");
+
+	canvas.toBlob(function(blob) {
+		var formData = new FormData();
+		formData.append('img', blob, 'canvas.jpg');
+		console.info(formData)
+		//然后把这个formData扔给ajax就好了。babababa
+	});
+</script>

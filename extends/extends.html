@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    class Family {
+    	constructor () {
+    		this.name = 'mengxiang'
+            this.sex = 'man'
+        }
+        work() {
+    		console.info('home')
+        }
+    }
+
+    let mx = new Family()
+    let dz = new Family()
+    dz.__proto__.go = () => {
+    	console.info(1)
+    }
+
+    mx.go()
+
+
+</script>

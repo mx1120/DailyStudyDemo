@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var arr = [1,2,3,4]
+    var arr2 = ['a', 'b', 'c', 'd', 'e', 'f']
+
+    for(var i = 0; i < arr.length; i++){
+        for(var j = 0; j < arr2.length; j++){
+            console.info(i)
+        }
+    }
+
+
+    var id = getUrlParam("id"),
+	    $content = $(".ibox-content.form-horizontal"),
+	    $addContent = $(".addContent"),
+	    $addOpacity = $(".addOpacity"),
+	    Contentlist,
+	    contentnum = 0;   //段落标记
+
+    $(function () {
+	    getuserInfo();
+	    //点击课文段落增加
+	    $addContent.on("click",function () {
+		    var div = $("<div>").addClass("col-md-12 col-sm-12 addBox"),
+			    div1 = $("<div>").addClass("form-group col-md-12"),
+			    label = $("<label><span>第"+(contentnum+1)+"段</span></label>").addClass("col-md-2 control-label"),
+			    br = $("<br>"),
+			    button = $("<button>删除</button>").addClass("btn btn-danger h2 remove"),
+			    div2 = $("<div>").addClass("col-sm-8"),
+			    div3 = $("<div>").addClass("summernote");
+		    div2.append(div3)
+		    label.append(br);
+		    label.append(button);
+		    div1.append(label);
+		    div1.append(div2);
+		    div.append(div1)
+		    $(".ibox-content.form-horizontal .addBtnBox").before(div);
+		    contentnum++;
+		    summer()
+	    })
+	    //点击课文段落删除
+	    $content.on("click",".remove",function () {
+		    $(this).parents(".addBox").remove();
+		    for(var i= 0;i<$(".addBox").length;i++){
+			    if($($(".addBox")[i]).index()>$(this).parents(".addBox").index()){
+				    $($(".addBox")[i]).find(".control-label span").text("第"+($($(".addBox")[i]).index()+1)+"段")
+			    }
+		    }
+		    contentnum--;
+	    });
+
+	    //添加选项
+	    $addOpacity.on("click",function () {
+		    $(this).parents(".addOpacityBox")
+	    })
+    })
+    function getuserInfo(){
+	    $.post(domain+'/admin/reading/details',{"re_ID":id},function(data){
+		    console.log(data.data);
+		    Contentlist = data.data.re_Content.split("||");  //获取段落
+		    var topic = data.data.topic;
+		    contentnum = Contentlist.length;
+		    for(var i = 0;i<Contentlist.length;i++ ){
+			    var div = $("<div>").addClass("col-md-12 col-sm-12"),
+				    div1 = $("<div>").addClass("form-group col-md-12"),
+				    label = $("<label>").addClass("col-md-2 control-label"),
+				    div2 = $("<div>").addClass("col-sm-8"),
+				    div3 = $("<div>").addClass("summernote");
+			    div3.html(Contentlist[i]);
+			    div2.append(div3)
+			    label.html('第'+(i+1)+'段');
+			    div1.append(label);
+			    div1.append(div2);
+			    div.append(div1)
+			    $(".ibox-content.form-horizontal .addBtnBox").before(div);
+		    }
+		    for(var i =0;i<topic.length;i++){
+			    var Options = topic[i].rd_Options.split("||");
+			    var TitleDry = topic[i].rd_TitleDry;  //题干
+			    var AnalysisProcess = topic[i].rd_AnalysisProcess;  //解析
+			    var TrueOption = topic[i].rd_TrueOption;  //答案
+			    var div = $("<div>").addClass("col-md-12 col-sm-12"),
+				    h2 = $("<h2>第"+(i+1)+"题</h2>").addClass("text-center col-md-8 col-md-offset-2"),
+				    div1 = $("<div>").addClass("form-group col-md-12"),
+				    div1_label1 = $("<label>题干</label>").addClass("col-md-2 control-label"),
+				    div1_div1 = $("<div>").addClass("col-sm-8"),
+				    div1_div1_summernote = $("<div>").addClass("summernote");
+			    div1_div1_summernote.html(TitleDry);
+			    div1_div1.append(div1_div1_summernote);
+			    div1.append(div1_label1);
+			    div1.append(div1_div1);
+			    div.append(h2);
+			    div.append(div1);
+
+			    for(var j=0;j<Options.length;j++){
+				    var option = "";
+				    switch (j){
+					    case 0:
+						    option = "A";
+						    break;
+					    case 1:
+						    option = "B";
+						    break;
+					    case 2:
+						    option = "C";
+						    break;
+					    case 3:
+						    option = "D";
+						    break;
+					    case 4:
+						    option = "E";
+						    break;
+				    }
+				    var div_opacity = $("<div>").addClass("form-group col-md-12 opacity"),
+					    label = $('<label class="col-md-2 control-label">选项'+(j+1)+'<br/>' +
+						    '<button class="btn btn-danger h2 remove_opacity">删除</button></label>'),
+					    div1 = $("<div>").addClass("col-sm-8"),
+					    opacity_summernote = $("<div>").addClass("summernote").html(Options[j]);
+				    if(option == TrueOption){
+					    var radio =$('<div class="radio i-checks"><label><input type="radio"  value="'+option+'" name="answer" checked> <i></i>'+option+'</label></div>');
+				    }else {
+					    var radio =$('<div class="radio i-checks"><label><input type="radio" value="'+option+'" name="answer"> <i></i>'+option+'</label></div>');
+				    }
+				    div1.append(opacity_summernote);
+				    div1.append(radio);
+				    div_opacity.append(label);
+				    div_opacity.append(div1);
+				    div.append(div_opacity);
+			    }
+			    var  addOpacityBox= $("<div>").addClass("col-md-2 col-sm-2 text-center col-md-offset-5 addOpacityBox"),
+				    addOpacity = $('<div class="form-group"> <button class="btn btn-success btn-w-m addOpacity">添加选项</button></div>'),
+				    process =$('<div class="form-group col-md-12 opacity"><label class="col-md-2 control-label">解析过程</label><div class="col-sm-8"><div class="summernote">'+AnalysisProcess+'</div></div></div>');
+			    addOpacityBox.append(addOpacity)
+			    div.append(addOpacityBox);
+			    div.append(process);
+			    $(".ibox-content.form-horizontal").append(div);
+		    }
+
+		    summer();
+	    })
+    }
+    function summer() {
+	    // $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green"});
+	    $(".summernote").summernote({
+		    lang: "zh-CN",
+		    height:100,
+		    placeholder:"请输入内容",
+		    focus:true,
+		    dialogsFade:true,
+		    toolbar: [ //生成最简单的工具条
+			    ['style', ['bold', 'italic', 'underline']]
+		    ]
+	    })
+    }
+</script>

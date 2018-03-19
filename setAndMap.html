@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Set And Map</title>
+</head>
+<body>
+    <div>
+        <h1>sample practice</h1>
+    </div>
+    <div>
+        <h1>sample practice</h1>
+    </div>
+    <div>
+        <h1>sample practice</h1>
+    </div>
+    <div>
+        <h1>sample practice</h1>
+    </div>
+    <p>
+        <h3 class="mx1">你好</h3>
+    </p>
+
+    <p class="mx">
+        <h3>你好1</h3>
+    </p>
+    <p class="mx">
+        <h3>你好</h3>
+    </p>
+    <p id="test_id">
+        <h3>你好2</h3>
+    </p>
+    <p class="mx">
+        <h3>你好3</h3>
+    </p>
+    <p>
+        <h3>你好4</h3>
+    </p>
+    <div style="width: 100px;height: 70px;background: #903" onclick="add()">
+        点击添加了+
+    </div>
+    <div style="width: 100px;height: 70px;background: #903" onclick="reduce()">
+        点击添加了-
+    </div>
+</body>
+</html>
+<style>
+    *{
+        padding:0;
+        margin: 0;
+    }
+</style>
+<script>
+    /*map,Set中，Nan与Nan是始终被认为相等的*/
+
+   /*第一小段----------------------------------------------------------------*/
+
+
+    //Set数据结相当数组的一种新型数据结构 便利数各种数组操作（对应map、filter）
+
+    /*const array = [1,2,3,2,5,4,5,4,7,8,1]
+
+    const s = new Set()
+
+    array.map(x=>s.add(x))
+
+    for(i of s){
+        console.log(i)
+    }
+
+
+    const set = new Set([1,2,3,4])
+    //[...set]将Set类型转变为一个数组
+    console.log([...set])
+
+
+    const items = new Set([1,2,3,4,5,6,7,1,1,1,1,1])
+    //若为Set数据结构时，计算其size的时候，只会计算不重复的单位，重复的单位会给予hulue
+    console.log(items.size)
+
+
+    function divs() {
+        return [...document.querySelectorAll('div')]
+    }
+    const set2 = new Set(divs())
+    console.log(set2.size)
+
+
+    divs().forEach(div=> set2.add(div))
+    console.log(set2.size)
+    */
+
+
+
+     /*第二小段----------------------------------------------------------*/
+
+
+    //判读是否有某个属性
+/*
+    const properties = new Set()
+    //想数据结构中添加相应的属性
+    properties.add('mx')
+    properties.add('pl')
+    //判断properties中是否有相应的属性
+    if(properties.has('mx')){
+        console.log('okay')
+    }
+   if(properties.has('mx')){
+       properties.delete('mx')
+       console.log(properties)
+
+       properties.clear()
+       console.log(properties)
+   }
+
+
+   //更加优秀的数组去重方法
+
+
+
+    //Array.from可以将set结构转变为一个数组
+
+    function dedupe() {
+       return Array.from(new Set(array2))
+   }
+
+
+   dedupe2 = () => [...new Set(array2)]
+
+   dedupe3 = [...new Set(array2)]
+
+    console.log(dedupe())
+    console.log(dedupe2())
+   console.log(dedupe3)
+
+
+
+
+    //数组遍历的四种方法
+
+    let set = new Set(['red','green','blue'])
+
+    for (let item of set.keys()) {
+       console.log(item)
+    }
+
+    for(let item of set.values()){
+       console.info(item)
+    }
+
+    for(let item of set.entries()){
+        console.log(item)
+    }
+
+
+
+    let set3 = new Set(array2)
+
+   set3 = new Set([...set3].map(x=>x*2))
+    console.log(set3)
+
+    //使用set方法实现 并集，交集，差集
+
+    let a = new Set([1,2,3])
+    let b = new Set([4,3,2])
+
+    //并集
+
+    let union = new Set([...a,...b])
+    console.log([...union])
+
+    //交集
+
+    let intersect = new Set([...a].filter(x=>b.has(x)))
+    console.log([...intersect])
+
+    //差集
+    let difference = new Set([...a].filter(x=>!b.has(x)))
+    console.log([...difference])
+
+
+
+    let set4 = new Set([1,2,3])
+    set4.forEach((v,i)=> {console.log(v*2,i)})
+
+    //在遍历中改变set的数据结构
+    let set5 = new Set([1,2,3])
+
+    set5 = new Set([...set5].map( v=>v*5))
+   //此处已经更改过set5的Set结构
+    console.log([...set5])*/
+
+    /*第三阶段----------------------------------------------------------------*/
+
+    //weakSet作用于对象的新的数据结构
+
+    //Map结构
+
+    const map = new Map()
+
+   //set之后，['a']，再内存中变成地址，当使用map.get(['a'])方法时，此时get中的['a']地址指针并不是原来的，所以得到是undefined
+    map.set(['a'],555)
+    console.log(map.get(['a'])) //undefined
+
+    let k1 = ['a']
+    let k2 = ['b']
+    map.set(k1,111).set(k2,222)
+
+    console.log(map)
+    console.log(map.get(k1))
+    console.log(map.get(k2))
+
+    //set方法返回的是Map本身，一次可以采用链式写法
+
+    let map2 = new Map()
+        .set(1,'a')
+        .set(2,'b')
+        .set(3,'c')
+
+    console.log(map2.size)
+
+    //map4中方法
+    //1.set(key,value)方法设置键值对
+    //2.get(key)方法读取值
+    //3.has(key)
+    //clear()方法，清除所有成员
+
+
+    let map3 = new Map([['M','no'],['X','yes']])
+    console.log(map3)
+
+    for (let item of map3.keys()){
+        console.log(item)
+    }
+
+    for(let item of map3.values()){
+        console.log(item)
+    }
+
+    for(let item of map3.entries()){
+        console.log(item[0],item[1])
+    }
+
+
+    for(let [key,value] of map3.entries()){
+        console.log(key ,value)
+    }
+
+    let map0 = new Map()
+        .set(1,'a')
+        .set(2,'b')
+        .set(3,'c')
+    console.log(map0)
+    console.log([...map0.keys()])
+    console.log([...map0.values()])
+    console.log([...map0.entries()])
+
+    console.log('zdzdzdzdzdzdzdzd')
+
+    let map11 = new Map([...map0].filter(([k,v])=> k<3))
+    console.log([...map11.keys()])
+
+    let map22 = new Map([...map0].map(([k,v])=> [k*2,'_' + v]))
+    console.log([...map22.keys()])
+    console.log([...map22.values()])
+
+
+    function example() {
+        return [1,2,3]
+    }
+
+    let [a,b,c] = example()
+
+    let array_h3 = document.querySelectorAll('h3')
+    let array_p = [...document.querySelectorAll('p')]
+
+    console.log(array_p)
+    console.log(array_p[2].className)
+
+    //以下为两种方法，单作用一样
+
+    let msg = Array.from(array_h3,x=>x.innerText)
+
+    let msg2 = [...array_h3].map(x=>x.textContent)
+
+    let msg3 = [...document.querySelectorAll('p')].map(x=>x.innerText)
+
+    let msg4 = Array.from(document.querySelectorAll('p'),x=>x.innerText)
+
+    console.log(msg)
+
+    console.log(msg2)
+
+    console.log(msg3)
+
+    console.log(msg4)
+
+    //includes查询数组中是否包含有给定的value
+
+    console.log(msg.includes('你好'))
+
+    //此种方法输出值为nodelist(HTMLClolection)
+    console.log(document.querySelectorAll('#test_id'))
+    //此种方法使用扩展运算符，将上述的非数组转化为数组
+    console.log([...document.querySelectorAll('.mx')])
+
+    console.info(111111111111111111111111111111111111)
+    var mx = [
+        {'name':'孟', 'sex':'1'},
+        {'name':'祥', 'sex':'2'},
+        {'name':'解', 'sex':'3'},
+        {'name':'寒', 'sex':'4'},
+        {'name':'雨', 'sex':'5'}
+    ]
+    var word = []
+    var obj = {}
+    var num = 0
+    function add() {
+    	if(num == 5){
+    		return false
+        }
+        obj[mx[num].name] = mx[num].sex
+        num ++
+        word.push(obj)
+        console.info(obj)
+    }
+
+    function reduce() {
+    	if(num < 1){
+    		return false
+        }
+	    obj[mx[num - 1].name] = mx[num - 1].sex
+	    num --
+        word.push(obj)
+        console.info(obj)
+    }
+
+
+</script>

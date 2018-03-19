@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="js/cookie.js"></script>
+<script src="cookieToLocalStorage.js"></script>
+<script>
+    var obj = {
+        'a':'play'
+    }
+
+    localStorage.setItem('pl','123')
+    localStorage['ppp'] = '456'
+
+    console.log(localStorage.length)
+
+    localStorage.name = '孟祥'
+    console.log(localStorage.name)
+    SetCookie('name','wodemingzi')
+    SetCookie('mx','13579')
+    SetCookie('pl','2468')
+    SetCookie('ok','101214')
+
+    console.log(document.cookie)
+
+/*    var op = document.cookie.split(';');
+    var arr_key = []
+    var arr_val = []
+    var obj = {}
+    for (var item in op) {
+        if(item == 0){
+            arr_key.push(op[item].split('=')[0])
+            var mx = op[item].split('=')[0]
+            arr_val.push(op[item].split('=')[1])
+            obj[mx] = op[item].split('=')[1]
+        }else {
+            arr_key.push(op[item].split(' ')[1].split('=')[0])
+            var pl = op[item].split(' ')[1].split('=')[0]
+            arr_val.push(op[item].split(' ')[1].split('=')[1])
+            obj[pl] = op[item].split(' ')[1].split('=')[1]
+        }
+
+    }
+
+    console.log(arr_key)
+    console.log(arr_val)
+    console.log(obj)*/
+    /*console.log(op)
+    console.log(op[2].split(' ')[1].split('=')[1])*/
+
+    console.log(CookieToLocalStorage(document.cookie))
+
+    var obj = CookieToLocalStorage(document.cookie)
+
+    delete obj.name
+    console.log(obj)
+
+    SetCookie('dragon','long')
+
+    obj = CookieToLocalStorage(document.cookie)
+
+    console.log(obj)
+
+
+    SetCookie('man','fill')
+    console.log(obj)
+
+
+    var temObj = {
+        'a':1,
+        "b":2
+    }
+
+    for(var item in temObj){
+        console.log(item)
+    }
+
+    console.log(window)
+
+</script>

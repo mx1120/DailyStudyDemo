@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    $.ajax({
+        type:"post",
+        url:"http://112.74.110.217/index.php?ctrl=site&action=qrqjt",
+        dataType:"json",
+        jsonp:"callback",
+        data:{
+            shopid:192,
+            eid:77,
+            qingType:2
+        },
+        success:function(data){
+            console.log(data);
+        }
+    })
+</script>

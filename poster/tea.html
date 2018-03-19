@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tea</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>(function (doc, win) {
+		var htmlFont = function () {
+			var docEl = doc.documentElement, l = docEl.clientWidth, f;
+			f = l / 18;
+			l > 720 ? docEl.style.fontSize = 40 + "px" : docEl.style.fontSize = f + "px";
+		};
+		htmlFont();
+		win.addEventListener("resize", htmlFont, false);
+	})(document, window);</script>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="tea_explain">
+        <p class="top_ex">每道题都有免费名师视频讲解</p>
+        <div class="xcp">
+            <img src="./img/xcp.png" alt="">
+        </div>
+        <div class="xcp_explain">
+            <p>它以同步课堂为平台，以纸质练习册为载体，汇集一线名师，创造出一张张<em>可能性、能评价、会讲课</em>的只能练习册。</p>
+        </div>
+        <div class="tea_function">
+            <!--<p class="fn_header">教师功能</p>-->
+            <div class="fn_main">
+                <p class="fn_one">一、帮老师对学生进行一对一辅导</p>
+                <span class="fn_two">《智能测评学》每道试题均配有名师讲解视频，学生遇到不会做的题，扫码即可观看讲解。帮老师轻松辅导每一个学生的学习。</span>
+                <div class="fn_img">
+                    <img src="./img/one_to_one.png" alt="">
+                </div>
+                <p class="fn_one">二、作业在线批改，及时知道做题情况</p>
+                <span class="fn_two">完成测试后，扫描二维码提交作业，及时知道孩子当天的成绩、排名、答题情况、薄弱知识。</span>
+                <div class="fn_img_two">
+                    <img src="./img/fn_two.png" alt="">
+                </div>
+                <p class="fn_one">三、错题及时订正，当天问题当天解决</p>
+                <span class="fn_two">作业中产生的错题，通过引导孩子观看讲题视频、错题再做，进行及时订正。并推荐同类型试题，让孩子反复练习，直到学会、掌握为止。当天问题当天解决。</span>
+                <div class="fn_img_three">
+                    <img src="./img/fn_three.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, a, img, span, thead, tbody, tfoot {
+        margin: 0;
+        padding: 0; }
+
+    html {
+        font-size: 40px; }
+
+    body {
+        font-family: Tahoma, Arial, Helvetica, STHeiti; }
+
+    html {
+        overflow-y: scroll; }
+
+    fieldset, img {
+        border: 0; }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: normal; }
+
+    address, caption, cite, code, dfn, em, i, strong, th, var {
+        font-style: normal;
+        font-weight: normal; }
+
+    ol, ul, li {
+        list-style: none outside; }
+
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: ''; }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0; }
+
+    caption, th {
+        text-align: left; }
+
+    input, textarea, select, button {
+        font-family: 'Microsoft Yahei';
+        font-size: inherit;
+        *font-size: 100%;
+        font-weight: inherit;
+        resize: none; }
+
+    button {
+        cursor: pointer; }
+
+    :focus {
+        outline: 0; }
+
+    a {
+        text-decoration: none; }
+
+    a:hover {
+        text-decoration: none; }
+
+    img {
+        max-width: 100%; }
+
+    .header{
+        height: 12.25rem;
+        background: url("./img/top.png");
+        background-size: cover;
+    }
+    .tea_explain{
+        height: 15.75rem;
+        position: relative;
+    }
+    .tea_explain .top_ex{
+        text-align: center;
+        font-size: 1rem;
+        color: #81c33a;
+        margin-top: 0.5rem;
+        margin-bottom: 0.8rem;
+    }
+    .tea_explain .xcp{
+        margin: 0.75rem auto;
+        width: 15rem;
+        height: 8.3rem;
+    }
+    .tea_explain .xcp img{
+        width: 100%;
+        height: 100%;
+    }
+    .tea_explain .xcp_explain{
+        margin: 0 auto 0.5rem;
+        width: 16.5rem;
+    }
+    .tea_explain .xcp_explain P {
+        color: #333333;
+        font-size: 0.8rem;
+    }
+    .tea_explain .xcp_explain P em{
+        color: #ff7f00;
+    }
+    .tea_function .fn_header{
+        text-align: center;
+        font-size: 1rem;
+        color: #81c33a;
+        margin-top: 0.8rem;
+    }
+    .tea_function .fn_main{
+        background: #903;
+        box-sizing: border-box;
+        padding-top: 1.8rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-bottom: 0.75rem;
+        background: url("./img/bot_bg.png");
+        background-size: cover;
+    }
+    .tea_function .fn_one{
+        font-size: 0.9rem;
+        font-weight: bolder;
+        color: white;
+    }
+    .tea_function .fn_two{
+        display: inline-block;
+        font-size: 0.8rem;
+        color: white;
+        margin-top: 0.6rem;
+    }
+    .tea_function .fn_img{
+        width: 14.75rem;
+        height: 11.7rem;
+        margin: 0.75rem auto;
+        vertical-align: middle;
+        font-size: 0;
+    }
+    .tea_function .fn_img img{
+        width: 100%;
+        height: 100%;
+        font-size: 0;
+    }
+    .tea_function .fn_img_two {
+        width: 15.33rem;
+        height: 11.48rem;
+        margin: 0.75rem auto;
+        vertical-align: bottom;
+        font-size: 0;
+    }
+    .tea_function .fn_img_two img{
+        width: 100%;
+        height: 100%;
+        font-size: 0;
+    }
+    .tea_function .fn_img_three {
+        width: 12.1rem;
+        height: 13.45rem;
+        margin: 0.75rem auto 0;
+        font-size: 0;
+        vertical-align: bottom;
+    }
+</style>

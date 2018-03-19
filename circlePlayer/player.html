@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <audio src="douYouKonw.mp3" id="audio" loop></audio>
+</body>
+</html>
+<style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .wrap{
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background: rgba(0,0,0,.2) url("./bulande.jpg");
+        margin: 100px auto;
+        border-radius: 50%;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    .wrap:before{
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.5) url("./bulande.jpg") center;
+        background-size: cover;
+        border-radius: 50%;
+    }
+    .wrap.rotate:before{
+        animation: audioRoute 20s Linear infinite;
+    }
+    @keyframes audioRoute {
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+    .wrap:after{
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        content: " ";
+        width: 192px;
+        height: 192px;
+        border-radius: 50%;
+        background: rgba(0,0,0,.3) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAoCAMAAACl6XjsAAAAaVBMVEX///8AAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9ThU/0AAAAI3RSTlPMAJDBnhcQxrqzemtSOiMGAoZfLKqkjXBECoiFhGJIRi4MC3M9axoAAACkSURBVDjLrZRLDoMwDERdwKGkTSkt/X/h/ocEsZmdPVJ46ydFGdsj4VpWaeMhN5kpDp5WyEIMlCblqXW1heZnaqA6mxrolNKk3o2WBrb7o6WBPhEa4nY1qWNwNMRtaaC5exrihmbxVltD3A9HQ9zQLC5KadKRGv0o/4X8QF5KDosfff4ixbDWkvcp9wAR50Cc81OZqvkzxfVlavDTkqWaX9Fk4U9wrwfK2T44TgAAAABJRU5ErkJggg==') center no-repeat;
+        background-size: 38px 40px;
+
+    }
+    .wrap.rotate:after{
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAMAAAAJbCvNAAAAM1BMVEX///8AAAD///////////////////////////////////////////////////////////+Q8lQ3AAAAEXRSTlPmAOEXHcLcvrtvZlER1IyHDEwQIaQAAABJSURBVDjL7ctbEoAgDEPRBLWK4mP/q/XDIGUJzPT+NXOKY1u+1p2qm2D4ewTONhXCNQmkNs0BAgQYFrirCJj/Qa4i3VTZ6nSRL9xqAzIch8kgAAAAAElFTkSuQmCC');
+        background-size: 32px 34px;
+    }
+    .slice{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        clip: rect(0px,200px,200px,100px);
+    }
+    .slice.gt50{
+        clip: rect(auto,auto,auto,auto);
+    }
+    .bar, .fill{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px rgba(160,60,0,1) solid;
+        box-sizing: border-box;
+        border-radius: 50%;
+        clip: rect(0,100px,200px,0);
+    }
+    .slice.gt50 .fill{
+        transform: rotate(180deg);
+    }
+</style>
+
+<script>
+
+
+    let isPlay = true
+        process = 0
+        lastRadius = 0
+    let audio = document.querySelector('#audio')
+        bar = document.querySelector('.slice > .bar')
+        circleProgress = document.querySelector('.wrap')
+        slice = document.querySelector('.slice')
+
+    circleProgress.onclick = function () {
+    	if(isPlay){
+		    addClass(circleProgress,"rotate")
+		    audio.play()
+            isPlay = false
+        }else {
+    		removeClass(circleProgress,"rotate")
+    		audio.pause()
+            isPlay = true
+        }
+    }
+    audio.addEventListener('timeupdate',function () {
+        process = audio.currentTime / audio.duration * 360
+        parseInt(process) === 180 && addClass(slice,'gt50')
+        bar.style = 'transform:rotate(' + (process) + 'deg)'
+    })
+
+    audio.addEventListener('ended',function () {
+    	console.info('has end')
+        removeClass(circleProgress,'rotate')
+        removeClass(slice,'gt50')
+        bar.style = 'transform:rotate(0deg)'
+    })
+
+    function addClass(element,className) {
+	    const oldClass = element.className
+	    oldClass.indexOf(className) < 0 && (element.className = oldClass + " " + className)
+    }
+    function removeClass(element,className) {
+	    element.className = element.className.replace(new RegExp("\\s"+className),"")
+    }
+
+</script>

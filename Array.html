@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+
+    var aaa = [[1, 3], [2, 5], [3, 7]]
+
+    aaa.forEach( ([key, val]) => {
+    	console.info(key)
+        console.info(val)
+    })
+
+    let a = [1,2,3,4,4,4,4,4]
+
+    let aa = new Set(a)
+
+    console.info(Array.from(aa))
+
+    console.info([...new Set(a)])
+
+    let arr = ['1','2','3']
+
+
+    let mx = Array.from(arr,x=>x*2)
+
+    console.log(mx)
+
+
+    let arr2 = Array.of(4,5,6,7)
+    let arr3 = Array.of('m','x','p','l')
+    console.log(arr2)
+    console.log(arr3)
+
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd')
+    let arr_index = null
+
+    //find方法接受三个参数 val index arr  val为数组中的每一个数值  index为对应的下标   arr为原数组
+
+    let arr_val = arr2.find((val,index,arr)=>{
+                    arr_index = index
+                    return  val>6
+                })
+
+    console.log(arr_val)
+    console.log(arr_index)
+
+
+
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd')
+
+
+    let letter = ['a','b','c','d']
+
+    for (let index of letter.keys()){
+        console.log(index)
+    }
+
+    /*for (let elem of letter.values()){
+        console.log(elem)
+    }*/
+
+    for (let [elem,index] of letter.entries()){
+        console.log(index + elem)
+    }
+
+    let entries = letter.entries()
+
+   /* console.log(entries.next().values)*/
+
+
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzd')
+    //数组推导     目前Babel转码器已经支持
+    /*let beforeArray = [1,2,3,4]
+
+    let afterArray = [for(i of beforeArray) i*3]
+
+    console.log(afterArray)
+
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzd')*/
+
+    /*class Mx (m = 'max', x='okay'){
+
+    }*/
+
+    function Mx(m = 'max', x='okay') {
+        this.m = m
+        this.x = x
+    }
+
+
+    let mxConstructor = new Mx('talent')
+
+    function Pl({p,l = 'together'}) {
+        this.p = p
+        this.l = l
+    }
+
+    let plConstructor = new Pl({})
+
+    console.log(mxConstructor)
+
+    console.log(plConstructor)
+
+</script>

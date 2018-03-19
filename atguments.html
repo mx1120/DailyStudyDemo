@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //arguments代表当前函数内所包含的参数个数，是个伪数组，只有length一个长度
+    function arg() {
+    	let arr = (arguments.length === 1 ? [arguments[0]] : Array.prototype.splice.call(arguments))
+        for(var i = 0; i < arguments.length; i++){
+    		arr.push(arguments[i])
+        }
+        return arr
+    }
+    console.info(arg(0, 1, 2))
+
+
+    function arg2() {
+        return Array.from(arguments)
+    }
+
+    console.info(arg2(1, 2, 3, 4, 5))
+
+</script>
